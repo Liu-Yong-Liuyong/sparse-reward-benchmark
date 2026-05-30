@@ -226,6 +226,80 @@
 </section>
 <!-- End Benchmark Tasks -->
 
+<!-- Methods -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Methods</h2>
+        <div class="content has-text-justified">
+
+          <p>
+            We use Proximal Policy Optimization (PPO) as the base reinforcement learning algorithm across all benchmark environments. To study the effect of exploration under sparse rewards, we compare the standard PPO baseline with two intrinsic motivation methods: Intrinsic Curiosity Module (ICM) and Random Network Distillation (RND).
+          </p>
+
+          <p>
+            <strong>PPO Baseline.</strong> PPO learns a policy by optimizing a clipped surrogate objective, which improves training stability by limiting large policy updates. In our benchmark, PPO serves as the reference method for evaluating how well a standard policy-gradient algorithm performs under sparse reward settings.
+          </p>
+
+          <p>
+            <strong>PPO + ICM.</strong> The Intrinsic Curiosity Module provides additional intrinsic rewards based on prediction errors in the learned dynamics model. The agent is encouraged to visit states where its forward model cannot accurately predict the next feature representation.
+          </p>
+
+          <p>
+            <strong>PPO + RND.</strong> Random Network Distillation generates intrinsic rewards from the prediction error between a fixed random target network and a trainable predictor network. States that are novel to the agent produce larger prediction errors and therefore higher exploration bonuses.
+          </p>
+
+          <p>
+            All methods are trained using the same PPO training interface and evaluated under consistent environment settings, training timesteps, and metrics. This allows us to compare learning performance and exploration behavior across methods in a fair and reproducible way.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Methods -->
+
+<!-- Experimental Setup -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experimental Setup</h2>
+        <div class="content has-text-justified">
+
+          <p>
+            All experiments are conducted under sparse-reward settings to evaluate how different exploration strategies affect learning performance. We compare PPO, PPO+ICM, and PPO+RND across multiple benchmark environments, including discrete navigation tasks, classic control tasks, and robotic manipulation tasks.
+          </p>
+
+          <p>
+            For discrete and low-dimensional tasks, we adopt pure sparse rewards, where the agent receives external reward only after reaching the goal or completing the task. This setting directly tests whether the agent can discover successful trajectories with minimal feedback.
+          </p>
+
+          <p>
+            For high-dimensional continuous-control tasks such as Meta-World Reach-v3, a fully binary sparse reward can make learning extremely unstable because the agent may rarely encounter successful states during early training. Therefore, we use a controlled sparse-reward setting with milestone-based rewards for approaching the target and a very small dense shaping term of 0.005. This auxiliary reward is used only to provide minimal guidance and stabilize training, while the main learning objective remains success-oriented.
+          </p>
+
+          <p>
+            This design allows us to compare exploration methods under challenging reward conditions while avoiding completely uninformative training signals in continuous robotic manipulation tasks.
+          </p>
+
+          <p>
+            To ensure fair comparison, all methods are trained using the same PPO training pipeline, evaluation protocol, and environment configuration whenever possible. Training progress is monitored using success rate, average return, and exponentially weighted moving average (EWMA) success rate.
+          </p>
+
+          <p>
+            In addition to learning curves, we analyze state visitation patterns using heatmaps. These visualizations help reveal whether an exploration method improves state-space coverage and whether broader exploration leads to better task performance.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Experimental Setup -->
+
 <!-- Image carousel -->
 <section class="hero is-small">
   <div class="hero-body">

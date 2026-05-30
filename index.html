@@ -431,15 +431,15 @@
           </figure>
 
           <p>
-            The exploration heatmaps reveal distinct exploration behaviors among the three methods. PPO exhibits the most concentrated visitation pattern around the target region, suggesting that it quickly exploits successful trajectories once informative reward signals become available.
+            The exploration heatmaps reveal distinct behaviors among the three methods. PPO shows the most concentrated visitation pattern around the target region, suggesting that it quickly exploits successful trajectories once the weak dense reward provides useful guidance.
           </p>
 
           <p>
-            In contrast, ICM maintains a broader visitation distribution around the target area. This indicates that curiosity-driven exploration continues to encourage visits to nearby unexplored states even after successful trajectories have been discovered.
+            RND exhibits the highest visitation frequency around the target neighborhood, but this does not translate into the best success rate. This suggests that reaching or passing through the target region is not sufficient for successful reaching; the agent must also learn a stable control policy that consistently satisfies the success condition.
           </p>
 
           <p>
-            RND exhibits the widest exploration coverage among all methods. While this behavior increases state-space exploration, it also slows policy convergence because exploration remains active for a longer period of time. As a result, RND requires substantially more interactions before achieving comparable task performance.
+            ICM appears to visit the target neighborhood less frequently than RND, but it achieves better learning performance. This indicates that ICM may convert exploration into more stable reaching behavior, while RND may continue novelty-seeking around the target and delay exploitation. Overall, these results highlight that target-region coverage and final task success are related but not equivalent.
           </p>
 
           <figure class="image">

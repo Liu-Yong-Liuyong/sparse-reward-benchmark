@@ -413,6 +413,46 @@
             Compared with the pure sparse-reward setting, milestone rewards provide limited improvement but are still not sufficient to produce stable learning. The results suggest that reaching tasks in high-dimensional continuous-control environments require more informative guidance than sparse success signals or discrete milestone rewards alone. Without dense shaping, the agent may discover the target occasionally, but it struggles to maintain a stable policy.
           </p>
 
+          <h3 class="title is-4">Meta-World Reach-v3: Milestone Reward with Dense Shaping (0.005)</h3>
+
+          <p>
+            In the final Reach-v3 experiment, a small dense shaping reward of 0.005 is added on top of the milestone-based reward. Although the shaping reward is extremely small compared with the success reward, it significantly changes the learning dynamics of all methods.
+          </p>
+
+          <p>
+            Compared with the pure sparse-reward and milestone-only settings, all methods achieve substantially higher success rates. PPO reaches an EWMA success rate above 0.8 earlier than the intrinsic-motivation methods, indicating that the additional dense reward provides sufficient guidance for efficient policy optimization. ICM also achieves strong performance but converges more slowly, while RND requires the longest training time and does not consistently reach the same success level before training terminates.
+          </p>
+
+          <figure class="image">
+            <img src="static/images/r5.jpg" alt="Meta-World Reach-v3 dense shaping learning curves">
+            <figcaption class="has-text-centered">
+              Learning curves on Meta-World Reach-v3 with milestone rewards and a dense shaping reward of 0.005.
+            </figcaption>
+          </figure>
+
+          <p>
+            The exploration heatmaps reveal distinct exploration behaviors among the three methods. PPO exhibits the most concentrated visitation pattern around the target region, suggesting that it quickly exploits successful trajectories once informative reward signals become available.
+          </p>
+
+          <p>
+            In contrast, ICM maintains a broader visitation distribution around the target area. This indicates that curiosity-driven exploration continues to encourage visits to nearby unexplored states even after successful trajectories have been discovered.
+          </p>
+
+          <p>
+            RND exhibits the widest exploration coverage among all methods. While this behavior increases state-space exploration, it also slows policy convergence because exploration remains active for a longer period of time. As a result, RND requires substantially more interactions before achieving comparable task performance.
+          </p>
+
+          <figure class="image">
+            <img src="static/images/reach.jpg" alt="Meta-World Reach-v3 dense shaping exploration heatmaps">
+            <figcaption class="has-text-centered">
+              Exploration heatmaps of Meta-World Reach-v3 with milestone rewards and a dense shaping reward of 0.005.
+            </figcaption>
+          </figure>
+
+          <p>
+            Comparing all three reward settings reveals that a small dense shaping signal plays a critical role in high-dimensional sparse-reward robotic manipulation tasks. While intrinsic rewards can encourage exploration, they are insufficient by themselves to consistently guide the agent toward the goal. Once a weak dense reward is introduced, exploration becomes more task-relevant, allowing stable policy learning and substantially higher success rates.
+          </p>
+
         </div>
       </div>
     </div>

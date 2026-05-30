@@ -160,6 +160,71 @@
 </section>
 <!-- End paper abstract -->
 
+<!-- Overview -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <div class="content has-text-justified">
+
+          <p>
+            Sparse-reward environments remain one of the most challenging settings in reinforcement learning because agents receive meaningful feedback only after completing long sequences of correct actions. In such scenarios, learning performance depends heavily on the agent's ability to explore the environment efficiently. Although many exploration strategies have been proposed, including entropy regularization, intrinsic curiosity, random network distillation, and information-theoretic approaches, their effectiveness often varies across tasks and experimental settings.
+          </p>
+
+          <p>
+            A major limitation of existing studies is the lack of a unified evaluation framework. Exploration methods are frequently tested on different environments, reward structures, and evaluation protocols, making fair comparison difficult. Furthermore, commonly used benchmarks such as Atari and classic control tasks are not specifically designed to isolate exploration capability under sparse rewards.
+          </p>
+
+          <p>
+            To address this issue, we develop a sparse-reward benchmark for reinforcement learning exploration. The benchmark evaluates PPO, PPO+ICM, and PPO+RND across multiple sparse-reward environments. We analyze learning curves, success rates, and state visitation patterns to better understand how different exploration mechanisms influence learning performance under sparse-reward settings.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Overview -->
+
+<!-- Benchmark Tasks -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Benchmark Tasks</h2>
+        <div class="content has-text-justified">
+
+          <p>
+            To systematically evaluate exploration under sparse-reward settings, we construct a benchmark consisting of environments with increasing exploration difficulty. All tasks are modified to provide sparse rewards, where agents receive meaningful feedback only after successfully completing the task.
+          </p>
+
+          <p>
+            <strong>Sparse Gridworld</strong> is a deterministic navigation environment in which the agent must discover a distant goal state without intermediate rewards. This task provides a simple setting for visualizing state coverage and exploration behavior.
+          </p>
+
+          <p>
+            <strong>FrozenLake</strong> introduces stochastic transitions, making exploration more challenging and allowing us to evaluate the robustness of exploration methods under environmental randomness.
+          </p>
+
+          <p>
+            <strong>Sparse CartPole</strong> extends the classic CartPole control problem by replacing dense rewards with sparse success signals. This environment combines sparse feedback with continuous-state dynamics.
+          </p>
+
+          <p>
+            <strong>Meta-World Reach-v3</strong> and <strong>Meta-World Push-v3</strong> are robotic manipulation tasks used to evaluate exploration in high-dimensional continuous control settings. Dense reward shaping is removed to create challenging sparse-reward versions of the tasks, requiring agents to discover successful behaviors with limited external feedback.
+          </p>
+
+          <p>
+            Together, these environments provide a diverse evaluation suite spanning discrete navigation, stochastic exploration, classic control, and robotic manipulation.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Benchmark Tasks -->
 
 <!-- Image carousel -->
 <section class="hero is-small">

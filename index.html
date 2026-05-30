@@ -345,6 +345,74 @@
             Overall, the FrozenLake results suggest that intrinsic motivation does not significantly improve the final success rate when PPO with entropy regularization already performs well. Instead, ICM mainly improves early learning efficiency, while RND behaves more similarly to PPO and learns more slowly. This highlights the difference between exploration behavior, learning speed, and final task performance in sparse-reward environments.
           </p>
 
+          <h3 class="title is-4">Meta-World Reach-v3: Pure Sparse Reward</h3>
+
+          <p>
+            We first evaluate Meta-World Reach-v3 under a pure sparse-reward setting. In this setting, the original dense reward is removed, and the agent receives a reward only when the target is successfully reached. This makes the task significantly more difficult than FrozenLake because most interactions provide no external learning signal.
+          </p>
+
+          <p>
+            The learning curves show that PPO occasionally discovers successful trajectories, especially in the later stage of training, leading to several spikes in success rate and average return. However, the performance remains unstable. ICM shows a short early improvement but fails to maintain consistent success, while RND shows almost no successful learning under this setting.
+          </p>
+
+          <figure class="image">
+            <img src="static/images/rb5.jpg" alt="Meta-World Reach-v3 pure sparse reward learning curves">
+            <figcaption class="has-text-centered">
+              Learning curves on Meta-World Reach-v3 under the pure sparse-reward setting.
+            </figcaption>
+          </figure>
+
+          <p>
+            The exploration heatmaps further suggest that PPO visits regions closer to the target more frequently, which explains its occasional success. In contrast, ICM and RND tend to concentrate visits around specific workspace regions or boundaries rather than consistently exploring the target area. This indicates that intrinsic rewards do not necessarily produce task-relevant exploration in high-dimensional continuous-control environments.
+          </p>
+
+          <figure class="image">
+            <img src="static/images/reach_basic.jpg" alt="Meta-World Reach-v3 pure sparse reward exploration heatmaps">
+            <figcaption class="has-text-centered">
+              Exploration heatmaps of Meta-World Reach-v3 under the pure sparse-reward setting.
+            </figcaption>
+          </figure>
+
+          <p>
+            Overall, the Reach-v3 results show that pure sparse rewards make robotic manipulation substantially harder than discrete navigation tasks. Unlike FrozenLake, where all methods eventually learn reasonable policies, Reach-v3 requires more informative exploration guidance. This motivates the use of controlled sparse rewards or weak shaping terms in later experiments to stabilize training while still preserving the sparse-reward challenge.
+          </p>
+
+          <h3 class="title is-4">Meta-World Reach-v3: Milestone Reward without Dense Shaping</h3>
+
+          <p>
+            In the second Reach-v3 experiment, we introduce a milestone-based reward wrapper that provides additional rewards when the end-effector moves closer to the target. However, the dense shaping reward is still set to zero. This setting provides slightly more guidance than the pure sparse-reward version, but the agent still does not receive continuous distance-based feedback.
+          </p>
+
+          <p>
+            The learning curves show that all methods remain unstable under this setting. PPO and ICM achieve short periods of success in the early stage of training, but their success rates quickly drop and do not recover consistently. RND shows a delayed improvement around the middle stage of training, but the improvement is temporary and does not lead to stable task completion.
+          </p>
+
+          <figure class="image">
+            <img src="static/images/rdc5.jpg" alt="Meta-World Reach-v3 milestone reward without dense shaping learning curves">
+            <figcaption class="has-text-centered">
+              Learning curves on Meta-World Reach-v3 using milestone-based rewards without dense shaping.
+            </figcaption>
+          </figure>
+
+          <p>
+            The exploration heatmaps indicate that the agents still concentrate their visits around limited regions of the workspace. Compared with the pure sparse-reward setting, the milestone reward does not clearly shift the visitation distribution toward the target. Instead, PPO, ICM, and RND all show strong concentration near specific boundaries or corners, suggesting that milestone rewards alone are not sufficient to guide stable target-oriented exploration.
+          </p>
+
+          <p>
+            ICM shows particularly strong concentration near the lower-left region, which suggests that curiosity-driven exploration may become trapped in locally novel but task-irrelevant regions. Similarly, PPO and RND do not show a clearly target-centered visitation pattern. This explains why the learning curves only show short success spikes rather than stable improvement.
+          </p>
+
+          <figure class="image">
+            <img src="static/images/reach_dc0.jpg" alt="Meta-World Reach-v3 milestone reward without dense shaping exploration heatmaps">
+            <figcaption class="has-text-centered">
+              Exploration heatmaps of Meta-World Reach-v3 using milestone-based rewards without dense shaping.
+            </figcaption>
+          </figure>
+
+          <p>
+            Compared with the pure sparse-reward setting, milestone rewards provide limited improvement but are still not sufficient to produce stable learning. The results suggest that reaching tasks in high-dimensional continuous-control environments require more informative guidance than sparse success signals or discrete milestone rewards alone. Without dense shaping, the agent may discover the target occasionally, but it struggles to maintain a stable policy.
+          </p>
+
         </div>
       </div>
     </div>

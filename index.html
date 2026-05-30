@@ -320,25 +320,29 @@
           </p>
 
           <figure class="image">
-            <img src="static\images\frozenlake_eval.jpg" alt="FrozenLake learning curves">
+            <img src="static/images/frozenlake_eval.jpg" alt="FrozenLake learning curves">
             <figcaption class="has-text-centered">
               Learning curves on FrozenLake evaluated every 5,000 steps.
             </figcaption>
           </figure>
 
           <p>
-            The visitation heatmaps further show that intrinsic motivation changes the exploration behavior of the agent. PPO mainly concentrates visits along the successful path toward the goal. ICM produces a broader and more balanced visitation pattern, indicating stronger state-space exploration. RND also increases exploration coverage, but this broader exploration does not directly lead to faster task success.
+            The visitation heatmaps show that all methods eventually concentrate their visits along the upper row and right column, which correspond to the dominant successful path toward the goal. PPO and RND exhibit relatively similar final visitation patterns, indicating that both methods mainly exploit the successful route after learning.
+          </p>
+          
+          <p>
+            In contrast, ICM shows noticeably higher visitation frequencies around the starting region and nearby states, especially along the upper-left part of the map. This suggests that ICM does not necessarily increase global exploration coverage, but it improves local exploration around early states, which may help the agent discover successful trajectories earlier in training.
           </p>
 
           <figure class="image">
-            <img src="static\images\frozenlake_heatmap.jpg" alt="FrozenLake visitation heatmap">
+            <img src="static/images/frozenlake_heatmap.jpg" alt="FrozenLake visitation heatmap">
             <figcaption class="has-text-centered">
               State visitation heatmaps after training on FrozenLake.
             </figcaption>
           </figure>
 
           <p>
-            Overall, these results suggest that more exploration does not always lead to better final performance. ICM improves early exploration efficiency, while RND explores more broadly but learns more slowly. This highlights the difference between exploration coverage and policy learning efficiency in sparse-reward environments.
+            Overall, the FrozenLake results suggest that intrinsic motivation does not significantly improve the final success rate when PPO with entropy regularization already performs well. Instead, ICM mainly improves early learning efficiency, while RND behaves more similarly to PPO and learns more slowly. This highlights the difference between exploration behavior, learning speed, and final task performance in sparse-reward environments.
           </p>
 
         </div>
@@ -347,7 +351,7 @@
   </div>
 </section>
 <!-- End Results -->
-
+ 
 <!-- Image carousel -->
 <section class="hero is-small">
   <div class="hero-body">

@@ -377,6 +377,42 @@
             Overall, the Reach-v3 results show that pure sparse rewards make robotic manipulation substantially harder than discrete navigation tasks. Unlike FrozenLake, where all methods eventually learn reasonable policies, Reach-v3 requires more informative exploration guidance. This motivates the use of controlled sparse rewards or weak shaping terms in later experiments to stabilize training while still preserving the sparse-reward challenge.
           </p>
 
+          <h3 class="title is-4">Meta-World Reach-v3: Basic Wrapper with Weak Dense Shaping</h3>
+
+          <p>
+            In this Reach-v3 experiment, we replace the milestone-based reward design with a simpler basic reward wrapper and introduce a weak dense shaping term with <code>dense_coef = 0.005</code>. Compared with the milestone setting, this wrapper provides a smoother and more direct learning signal, while still remaining much weaker than a fully dense reward formulation.
+          </p>
+
+          <p>
+            The learning curves show that the PPO baseline performs best under this setting. PPO reaches high success rates more quickly and achieves the most stable improvement in both success rate and EWMA success rate. ICM also learns the task to some extent, but its improvement is slower and less stable than PPO. In contrast, RND performs the worst: although it occasionally reaches moderate success rates, it fails to maintain consistent progress and does not converge as reliably as the other two methods.
+          </p>
+
+          <figure class="image">
+            <img src="static/images/rb0.005_5.jpg" alt="Meta-World Reach-v3 basic wrapper with weak dense shaping learning curves">
+            <figcaption class="has-text-centered">
+              Learning curves on Meta-World Reach-v3 using a basic reward wrapper with weak dense shaping.
+            </figcaption>
+          </figure>
+
+          <p>
+            The exploration heatmaps further support this observation. PPO shows a concentrated visitation pattern around the target region across the x-y, x-z, and y-z projections, indicating that the weak dense shaping term is already sufficient to guide the policy toward effective reaching behavior. ICM also explores around the target region, but its visitation pattern is more diffuse, suggesting that curiosity-driven exploration does not translate into equally efficient exploitation. RND appears visually concentrated in some projections, but this does not lead to strong learning performance.
+          </p>
+
+          <p>
+            In particular, PPO exhibits the clearest alignment between target-centered exploration and final task success. ICM reaches similar task-relevant regions, but its visitation remains broader and less stable. RND, despite sometimes showing seemingly focused exploration heatmaps, fails to convert this exploration pattern into sustained reaching success. This suggests that a visually concentrated exploration map does not necessarily imply faster or better policy learning.
+          </p>
+
+          <figure class="image">
+            <img src="static/images/rbasic_0.005.jpg" alt="Meta-World Reach-v3 basic wrapper with weak dense shaping exploration heatmaps">
+            <figcaption class="has-text-centered">
+              Exploration heatmaps of Meta-World Reach-v3 using a basic reward wrapper with weak dense shaping.
+            </figcaption>
+          </figure>
+
+          <p>
+            Overall, these results indicate that, in the Reach-v3 task, a simple and smooth reward structure with a very small amount of dense guidance is already sufficient for PPO to learn effectively. Under this semi-sparse setting, the additional intrinsic rewards from ICM and RND do not provide clear advantages, and may even interfere with efficient exploitation. Therefore, for relatively simple reaching tasks, reward design appears to have a stronger influence on performance than the choice of intrinsic exploration module.
+          </p>
+
           <h3 class="title is-4">Meta-World Reach-v3: Milestone Reward without Dense Shaping</h3>
 
           <p>
@@ -450,7 +486,7 @@
           </figure>
 
           <p>
-            Comparing all three reward settings reveals that a small dense shaping signal plays a critical role in high-dimensional sparse-reward robotic manipulation tasks. While intrinsic rewards can encourage exploration, they are insufficient by themselves to consistently guide the agent toward the goal. Once a weak dense reward is introduced, exploration becomes more task-relevant, allowing stable policy learning and substantially higher success rates.
+            Comparing all reward settings reveals that a small dense shaping signal plays a critical role in high-dimensional sparse-reward robotic manipulation tasks. Under both the milestone-based and basic-wrapper settings, adding a weak dense reward substantially improves learnability compared with the fully sparse case. However, the results also show that reward structure matters: with the basic wrapper and <code>dense_coef = 0.005</code>, the PPO baseline already learns the Reach-v3 task effectively, and even outperforms ICM and RND in terms of success rate and stability. This suggests that, once a smooth directional learning signal is available, additional intrinsic rewards are not always necessary and may even interfere with efficient exploitation. In contrast, under milestone-based reward designs, intrinsic exploration methods such as ICM and RND benefit more from the structured intermediate progress signals. Overall, the findings indicate that reward design has a strong influence on performance, and its interaction with exploration methods must be considered carefully.
           </p>
 
         </div>

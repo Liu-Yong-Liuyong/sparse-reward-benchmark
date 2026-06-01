@@ -380,11 +380,11 @@
           <h3 class="title is-4">Meta-World Reach-v3: Milestone Reward without Dense Shaping</h3>
 
           <p>
-            In the second Reach-v3 experiment, we introduce a milestone-based reward wrapper that provides additional rewards when the end-effector moves closer to the target. However, the dense shaping reward is still set to zero. This setting provides slightly more guidance than the pure sparse-reward version, but the agent still does not receive continuous distance-based feedback.
+            In the next Reach-v3 experiment, we introduce a milestone-based reward wrapper that provides additional rewards when the end-effector moves closer to the target. However, the dense shaping reward is still set to zero. This setting provides slightly more guidance than the pure sparse-reward version, but the agent still does not receive continuous distance-based feedback.
           </p>
 
           <p>
-            The learning curves show that all methods remain unstable under this setting. PPO and ICM achieve short periods of success in the early stage of training, but their success rates quickly drop and do not recover consistently. RND shows a delayed improvement around the middle stage of training, but the improvement is temporary and does not lead to stable task completion.
+            The learning curves show that all methods remain unstable under this setting. PPO and RND achieve short periods of success in the early stage of training, but their success rates quickly drop and do not recover consistently. ICM shows a delayed improvement around the middle stage of training, but the improvement is temporary and does not lead to stable task completion.
           </p>
 
           <figure class="image">

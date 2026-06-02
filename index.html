@@ -528,128 +528,137 @@
 
 
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Appendix A. Implementation Details</h2>
+        <div class="content has-text-justified">
+            <h3 class="title is-4">A.1 PPO Training Pipeline</h3>
+
+            <p>
+              The PPO training procedure is implemented through a lightweight utility function named <code>run_ppo</code>. This function is responsible for constructing the PPO model, launching training, and saving the final checkpoint for later evaluation. The output path is first converted into a <code>Path</code> object, and the corresponding directory is created if necessary. A Stable-Baselines3 PPO model is then initialized using the target environment and the hyperparameters specified in the configuration file.
+            </p>
+
+            <p>
+              After initialization, the model is trained through the <code>learn</code> function for a predefined number of timesteps. Optional callbacks can be attached to the training loop, allowing modules such as EWMA-based evaluation, ICM updates, or RND updates to be executed periodically during training. Once training is complete, the trained model is saved to the designated checkpoint path. This design provides a unified training interface across different benchmark environments and exploration settings.
+            </p>
+
+            <h3 class="title is-4">A.2 Training Script and Configuration</h3>
+
+            <p>
+              The training pipeline is implemented in a central script that loads experiment configurations, builds the environment, applies reward wrappers, initializes exploration modules, and launches PPO training. All experiment settings are defined in YAML configuration files, including environment parameters, wrapper options, agent hyperparameters, training length, output paths, and evaluation settings. This configuration-based design improves reproducibility and allows experiments to be modified without changing the main training logic.
+            </p>
+
+            <p>
+              To reduce run-to-run variation, the training script explicitly sets the random seed for Python, NumPy, and PyTorch. The same seed is also applied when resetting both the training and evaluation environments. After constructing the base environment, the script optionally applies sparse-reward wrappers according to the configuration. Exploration modules are then initialized if enabled.
+            </p>
+
+            <p>
+              Two intrinsic exploration options are supported in the current implementation: Intrinsic Curiosity Module (ICM) and Random Network Distillation (RND). For both methods, the training script initializes the exploration module, its optimizer, and the corresponding callback for periodic updates. For ICM, the script automatically detects whether the action space is discrete or continuous, and sets the action type and action dimension accordingly. This allows the same training pipeline to support both discrete environments such as FrozenLake and continuous-control environments such as Meta-World.
+            </p>
+
+            <p>
+              All active callbacks are collected into a callback list, which may include the ICM update callback, the RND update callback, and the EWMA success evaluation callback. If multiple callbacks are enabled, they are merged into a <code>CallbackList</code> so that they can be executed together during PPO training. This modular design keeps exploration-module optimization separate from policy learning while maintaining a unified overall pipeline.
+            </p>
+
+            <h3 class="title is-4">A.3 Exploration Modules</h3>
+
+            <p>
+              To improve learning under sparse rewards, we incorporate intrinsic exploration mechanisms on top of PPO. Although both methods aim to encourage broader exploration, they provide additional learning signals in different ways.
+            </p>
+
+            <h4 class="title is-5">A.3.1 Intrinsic Curiosity Module (ICM)</h4>
+
+            <p>
+              ICM encourages exploration through transition prediction error. It first maps observations into a latent feature space and then trains a forward model to predict the next-state feature from the current-state feature and the action. The intrinsic reward is computed from the forward prediction error. Transitions that are harder to predict produce larger intrinsic rewards, encouraging the agent to explore less predictable dynamics. In addition, an inverse dynamics model is trained jointly to predict the action from consecutive state features, which helps improve the learned representation.
+            </p>
+
+            <h4 class="title is-5">A.3.2 Random Network Distillation (RND)</h4>
+
+            <p>
+              RND measures novelty through feature prediction mismatch. It uses a fixed randomly initialized target network and a trainable predictor network. For a given observation, the intrinsic reward is defined as the prediction error between the two networks. Observations that are less familiar to the predictor produce larger prediction errors and therefore larger intrinsic rewards. As training proceeds and the predictor learns the visited observations, the intrinsic reward gradually decreases. This mechanism naturally encourages the agent to move toward less familiar regions of the state space.
+            </p>
+
+            <h4 class="title is-5">A.3.3 Comparison of Exploration Signals</h4>
+
+            <p>
+              ICM and RND emphasize novelty in different ways. ICM rewards transitions that are difficult to predict in a learned dynamics model, while RND rewards observations that remain poorly predicted by the predictor network relative to a fixed random target network. Therefore, ICM is more sensitive to transition-level unpredictability, whereas RND mainly captures state novelty through feature prediction mismatch.
+            </p>
+
+            <h3 class="title is-4">A.4 ICM Module Implementation</h3>
+
+            <p>
+              The Intrinsic Curiosity Module is implemented to support both discrete and continuous action spaces within a unified framework. The module first encodes each observation into a latent feature representation through a two-layer multilayer perceptron. This feature representation is then used by both the inverse and forward dynamics models.
+            </p>
+
+            <p>
+              The inverse model takes the concatenation of the current feature and the next-state feature as input and predicts the action that caused the transition. For discrete action spaces, this is formulated as a classification problem using cross-entropy loss. For continuous action spaces, it is formulated as a regression problem using mean squared error.
+            </p>
+
+            <p>
+              The forward model predicts the next-state feature from the current feature and the action. For discrete actions, the action is converted into a one-hot vector before concatenation. For continuous actions, the raw action vector is used directly. The forward model is trained with mean squared error between the predicted next feature and the encoded next feature.
+            </p>
+
+            <p>
+              The intrinsic reward is computed from the forward prediction error. In practice, the raw ICM intrinsic reward is further processed before being added to the extrinsic reward. For continuous-action environments, it is normalized by a running standard deviation to stabilize scale during training. Optional clipping can also be applied before scaling and reward combination. The total ICM loss is defined as a weighted combination of inverse loss and forward loss, controlled by the coefficient <code>beta</code>.
+            </p>
+
+            <h3 class="title is-4">A.5 ICM Update Callback</h3>
+
+            <p>
+              The ICM update callback is used to optimize the Intrinsic Curiosity Module alongside PPO during environment interaction. Instead of updating the module at every step, the callback performs periodic updates according to a predefined update frequency. The exploration wrapper stores transitions of the form <code>(s, a, s')</code> in an internal buffer, and these transitions are retrieved whenever the update condition is met.
+            </p>
+
+            <p>
+              When triggered, the callback converts the stored transitions into batched tensors for current observations, actions, and next observations. The action tensor type is adjusted automatically according to whether the action space is discrete or continuous. The callback then calls the ICM module to compute the inverse loss, forward loss, and total ICM loss. Afterward, a standard gradient update is performed by clearing gradients, backpropagating the loss, and updating the ICM parameters through the optimizer. This optimization process is kept separate from the PPO optimizer, allowing curiosity-model learning and policy learning to proceed in parallel.
+            </p>
+
+            <h3 class="title is-4">A.6 RND Module Implementation</h3>
+
+            <p>
+              The Random Network Distillation module is implemented to generate intrinsic reward based on feature-space prediction error. It consists of two neural networks: a fixed target network and a trainable predictor network. Both networks take the observation as input and output a feature vector of the same dimension.
+            </p>
+
+            <p>
+              The target network is randomly initialized and then frozen throughout training. The predictor network is trained to approximate the target network output. For a given observation, the intrinsic reward is defined as the squared prediction error between the predictor output and the target output. States that are less familiar to the predictor receive higher intrinsic reward, encouraging exploration toward novel observations.
+            </p>
+
+            <p>
+              In the implementation, the raw RND intrinsic reward is normalized by a running standard deviation before being scaled and added to the extrinsic reward. This normalization helps stabilize the novelty signal during training. The RND predictor is optimized using mean squared error loss between the predictor output and the fixed target output.
+            </p>
+
+            <h3 class="title is-4">A.7 RND Update Callback</h3>
+
+            <p>
+              The RND update callback is responsible for training the predictor network during PPO interaction. During rollout collection, the environment wrapper stores observations encountered by the agent. These observations are later retrieved through <code>pop_observations()</code> whenever the callback update condition is satisfied.
+            </p>
+
+            <p>
+              The callback performs updates periodically rather than at every step. When triggered, the stored observations are converted into a tensor batch on the same device as the RND module. The callback then computes the RND loss and updates the predictor network through a standard gradient step. Since the target network remains fixed, only the predictor network is optimized. As the predictor becomes more accurate on frequently visited observations, the intrinsic reward for those states decreases over time.
+            </p>
+
+            <h3 class="title is-4">A.8 Evaluation Pipeline</h3>
+
+            <p>
+              The evaluation module is implemented as a benchmark-oriented utility for testing trained agents under a consistent protocol. The function <code>run_one_episode()</code> executes one full episode in the target environment. During interaction, it records the received rewards, whether the task has been successfully completed, the visited coverage identifiers, and the episode length.
+            </p>
+
+            <p>
+              An episode is considered successful if any visited state during the episode reports <code>success = True</code> in the <code>info</code> dictionary. To evaluate exploration behavior, the evaluator also tracks all unique <code>coverage_id</code> values encountered during the episode and uses their count as the episode-level coverage metric.
+            </p>
+
+            <p>
+              The function <code>evaluate_agent</code> repeatedly runs single-episode evaluation for a predefined number of episodes. It aggregates average return, success rate, average coverage count, and the number of evaluated episodes. This modular evaluation design allows all methods to be compared under the same benchmark criteria.
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
-<h2 class="title is-3">Appendix A. Implementation Details</h2>
-
-<h3 class="title is-4">A.1 PPO Training Pipeline</h3>
-
-<p>
-  The PPO training procedure is implemented through a lightweight utility function named <code>run_ppo</code>. This function is responsible for constructing the PPO model, launching training, and saving the final checkpoint for later evaluation. The output path is first converted into a <code>Path</code> object, and the corresponding directory is created if necessary. A Stable-Baselines3 PPO model is then initialized using the target environment and the hyperparameters specified in the configuration file.
-</p>
-
-<p>
-  After initialization, the model is trained through the <code>learn</code> function for a predefined number of timesteps. Optional callbacks can be attached to the training loop, allowing modules such as EWMA-based evaluation, ICM updates, or RND updates to be executed periodically during training. Once training is complete, the trained model is saved to the designated checkpoint path. This design provides a unified training interface across different benchmark environments and exploration settings.
-</p>
-
-<h3 class="title is-4">A.2 Training Script and Configuration</h3>
-
-<p>
-  The training pipeline is implemented in a central script that loads experiment configurations, builds the environment, applies reward wrappers, initializes exploration modules, and launches PPO training. All experiment settings are defined in YAML configuration files, including environment parameters, wrapper options, agent hyperparameters, training length, output paths, and evaluation settings. This configuration-based design improves reproducibility and allows experiments to be modified without changing the main training logic.
-</p>
-
-<p>
-  To reduce run-to-run variation, the training script explicitly sets the random seed for Python, NumPy, and PyTorch. The same seed is also applied when resetting both the training and evaluation environments. After constructing the base environment, the script optionally applies sparse-reward wrappers according to the configuration. Exploration modules are then initialized if enabled.
-</p>
-
-<p>
-  Two intrinsic exploration options are supported in the current implementation: Intrinsic Curiosity Module (ICM) and Random Network Distillation (RND). For both methods, the training script initializes the exploration module, its optimizer, and the corresponding callback for periodic updates. For ICM, the script automatically detects whether the action space is discrete or continuous, and sets the action type and action dimension accordingly. This allows the same training pipeline to support both discrete environments such as FrozenLake and continuous-control environments such as Meta-World.
-</p>
-
-<p>
-  All active callbacks are collected into a callback list, which may include the ICM update callback, the RND update callback, and the EWMA success evaluation callback. If multiple callbacks are enabled, they are merged into a <code>CallbackList</code> so that they can be executed together during PPO training. This modular design keeps exploration-module optimization separate from policy learning while maintaining a unified overall pipeline.
-</p>
-
-<h3 class="title is-4">A.3 Exploration Modules</h3>
-
-<p>
-  To improve learning under sparse rewards, we incorporate intrinsic exploration mechanisms on top of PPO. Although both methods aim to encourage broader exploration, they provide additional learning signals in different ways.
-</p>
-
-<h4 class="title is-5">A.3.1 Intrinsic Curiosity Module (ICM)</h4>
-
-<p>
-  ICM encourages exploration through transition prediction error. It first maps observations into a latent feature space and then trains a forward model to predict the next-state feature from the current-state feature and the action. The intrinsic reward is computed from the forward prediction error. Transitions that are harder to predict produce larger intrinsic rewards, encouraging the agent to explore less predictable dynamics. In addition, an inverse dynamics model is trained jointly to predict the action from consecutive state features, which helps improve the learned representation.
-</p>
-
-<h4 class="title is-5">A.3.2 Random Network Distillation (RND)</h4>
-
-<p>
-  RND measures novelty through feature prediction mismatch. It uses a fixed randomly initialized target network and a trainable predictor network. For a given observation, the intrinsic reward is defined as the prediction error between the two networks. Observations that are less familiar to the predictor produce larger prediction errors and therefore larger intrinsic rewards. As training proceeds and the predictor learns the visited observations, the intrinsic reward gradually decreases. This mechanism naturally encourages the agent to move toward less familiar regions of the state space.
-</p>
-
-<h4 class="title is-5">A.3.3 Comparison of Exploration Signals</h4>
-
-<p>
-  ICM and RND emphasize novelty in different ways. ICM rewards transitions that are difficult to predict in a learned dynamics model, while RND rewards observations that remain poorly predicted by the predictor network relative to a fixed random target network. Therefore, ICM is more sensitive to transition-level unpredictability, whereas RND mainly captures state novelty through feature prediction mismatch.
-</p>
-
-<h3 class="title is-4">A.4 ICM Module Implementation</h3>
-
-<p>
-  The Intrinsic Curiosity Module is implemented to support both discrete and continuous action spaces within a unified framework. The module first encodes each observation into a latent feature representation through a two-layer multilayer perceptron. This feature representation is then used by both the inverse and forward dynamics models.
-</p>
-
-<p>
-  The inverse model takes the concatenation of the current feature and the next-state feature as input and predicts the action that caused the transition. For discrete action spaces, this is formulated as a classification problem using cross-entropy loss. For continuous action spaces, it is formulated as a regression problem using mean squared error.
-</p>
-
-<p>
-  The forward model predicts the next-state feature from the current feature and the action. For discrete actions, the action is converted into a one-hot vector before concatenation. For continuous actions, the raw action vector is used directly. The forward model is trained with mean squared error between the predicted next feature and the encoded next feature.
-</p>
-
-<p>
-  The intrinsic reward is computed from the forward prediction error. In practice, the raw ICM intrinsic reward is further processed before being added to the extrinsic reward. For continuous-action environments, it is normalized by a running standard deviation to stabilize scale during training. Optional clipping can also be applied before scaling and reward combination. The total ICM loss is defined as a weighted combination of inverse loss and forward loss, controlled by the coefficient <code>beta</code>.
-</p>
-
-<h3 class="title is-4">A.5 ICM Update Callback</h3>
-
-<p>
-  The ICM update callback is used to optimize the Intrinsic Curiosity Module alongside PPO during environment interaction. Instead of updating the module at every step, the callback performs periodic updates according to a predefined update frequency. The exploration wrapper stores transitions of the form <code>(s, a, s')</code> in an internal buffer, and these transitions are retrieved whenever the update condition is met.
-</p>
-
-<p>
-  When triggered, the callback converts the stored transitions into batched tensors for current observations, actions, and next observations. The action tensor type is adjusted automatically according to whether the action space is discrete or continuous. The callback then calls the ICM module to compute the inverse loss, forward loss, and total ICM loss. Afterward, a standard gradient update is performed by clearing gradients, backpropagating the loss, and updating the ICM parameters through the optimizer. This optimization process is kept separate from the PPO optimizer, allowing curiosity-model learning and policy learning to proceed in parallel.
-</p>
-
-<h3 class="title is-4">A.6 RND Module Implementation</h3>
-
-<p>
-  The Random Network Distillation module is implemented to generate intrinsic reward based on feature-space prediction error. It consists of two neural networks: a fixed target network and a trainable predictor network. Both networks take the observation as input and output a feature vector of the same dimension.
-</p>
-
-<p>
-  The target network is randomly initialized and then frozen throughout training. The predictor network is trained to approximate the target network output. For a given observation, the intrinsic reward is defined as the squared prediction error between the predictor output and the target output. States that are less familiar to the predictor receive higher intrinsic reward, encouraging exploration toward novel observations.
-</p>
-
-<p>
-  In the implementation, the raw RND intrinsic reward is normalized by a running standard deviation before being scaled and added to the extrinsic reward. This normalization helps stabilize the novelty signal during training. The RND predictor is optimized using mean squared error loss between the predictor output and the fixed target output.
-</p>
-
-<h3 class="title is-4">A.7 RND Update Callback</h3>
-
-<p>
-  The RND update callback is responsible for training the predictor network during PPO interaction. During rollout collection, the environment wrapper stores observations encountered by the agent. These observations are later retrieved through <code>pop_observations()</code> whenever the callback update condition is satisfied.
-</p>
-
-<p>
-  The callback performs updates periodically rather than at every step. When triggered, the stored observations are converted into a tensor batch on the same device as the RND module. The callback then computes the RND loss and updates the predictor network through a standard gradient step. Since the target network remains fixed, only the predictor network is optimized. As the predictor becomes more accurate on frequently visited observations, the intrinsic reward for those states decreases over time.
-</p>
-
-<h3 class="title is-4">A.8 Evaluation Pipeline</h3>
-
-<p>
-  The evaluation module is implemented as a benchmark-oriented utility for testing trained agents under a consistent protocol. The function <code>run_one_episode()</code> executes one full episode in the target environment. During interaction, it records the received rewards, whether the task has been successfully completed, the visited coverage identifiers, and the episode length.
-</p>
-
-<p>
-  An episode is considered successful if any visited state during the episode reports <code>success = True</code> in the <code>info</code> dictionary. To evaluate exploration behavior, the evaluator also tracks all unique <code>coverage_id</code> values encountered during the episode and uses their count as the episode-level coverage metric.
-</p>
-
-<p>
-  The function <code>evaluate_agent</code> repeatedly runs single-episode evaluation for a predefined number of episodes. It aggregates average return, success rate, average coverage count, and the number of evaluated episodes. This modular evaluation design allows all methods to be compared under the same benchmark criteria.
-</p>
  
 <!-- Image carousel -->
 <section class="hero is-small">

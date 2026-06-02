@@ -486,7 +486,40 @@
           </figure>
 
           <p>
-            Comparing all reward settings reveals that a small dense shaping signal plays a critical role in high-dimensional sparse-reward robotic manipulation tasks. Under both the milestone-based and basic-wrapper settings, adding a weak dense reward substantially improves learnability compared with the fully sparse case. However, the results also show that reward structure matters: with the basic wrapper and <code>dense_coef = 0.005</code>, the PPO baseline already learns the Reach-v3 task effectively, and even outperforms ICM and RND in terms of success rate and stability. This suggests that, once a smooth directional learning signal is available, additional intrinsic rewards are not always necessary and may even interfere with efficient exploitation. In contrast, under milestone-based reward designs, intrinsic exploration methods such as ICM and RND benefit more from the structured intermediate progress signals. Overall, the findings indicate that reward design has a strong influence on performance, and its interaction with exploration methods must be considered carefully.
+            Comparing all reward settings reveals that a small dense shaping signal plays a critical role in high-dimensional sparse-reward robotic manipulation tasks. Under both the milestone-based and basic-wrapper settings, adding a weak dense reward substantially improves learnability compared with the fully sparse case. However, the results further show that reward structure and exploration mechanism interact strongly. With the basic wrapper and <code>dense_coef = 0.005</code>, the PPO baseline learns the Reach-v3 task most effectively, indicating that a simple and smooth directional reward is already sufficient for stable policy learning. In contrast, when intrinsic exploration modules are introduced, both ICM and RND perform better under the milestone-based wrapper than under the basic wrapper, suggesting that these methods benefit more from structured intermediate progress signals. Overall, the findings indicate that performance is determined not only by whether dense shaping is present, but also by how the reward structure matches the underlying learning mechanism.
+          </p>
+
+          <figure class="image">
+            <img src="static/images/c1.jpg" alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for PPO">
+            <figcaption class="has-text-centered">
+              Success-rate comparison between milestone and basic reward wrappers for PPO on Meta-World Reach-v3, both using weak dense shaping.
+            </figcaption>
+          </figure>
+
+          <p>
+            For the PPO baseline, the basic wrapper produces faster and more stable learning than the milestone wrapper. This suggests that, without intrinsic exploration, PPO benefits most from a simple and smooth reward landscape that directly provides directional guidance.
+          </p>
+
+          <figure class="image">
+            <img src="static/images/c2.jpg" alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for ICM">
+            <figcaption class="has-text-centered">
+              Success-rate comparison between milestone and basic reward wrappers for PPO + ICM on Meta-World Reach-v3, both using weak dense shaping.
+            </figcaption>
+          </figure>
+
+          <p>
+            After adding ICM, the trend reverses. The milestone wrapper substantially outperforms the basic wrapper, indicating that curiosity-driven exploration benefits more from structured intermediate progress signals than from a purely smooth reward design.
+          </p>
+
+          <figure class="image">
+            <img src="static/images/c3.jpg" alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for RND">
+            <figcaption class="has-text-centered">
+              Success-rate comparison between milestone and basic reward wrappers for PPO + RND on Meta-World Reach-v3, both using weak dense shaping.
+            </figcaption>
+          </figure>
+
+          <p>
+            A similar pattern is observed for RND. The milestone wrapper again performs better than the basic wrapper, suggesting that novelty-driven exploration also requires more explicit task structure in order to convert exploration into stable task success.
           </p>
 
         </div>

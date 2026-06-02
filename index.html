@@ -169,15 +169,15 @@
         <div class="content has-text-justified">
 
           <p>
-            Sparse-reward environments remain one of the most challenging settings in reinforcement learning because agents receive meaningful feedback only after completing long sequences of correct actions. In such scenarios, learning performance depends heavily on the agent's ability to explore the environment efficiently. Although many exploration strategies have been proposed, including entropy regularization, intrinsic curiosity, random network distillation, and information-theoretic approaches, their effectiveness often varies across tasks and experimental settings.
+            Sparse-reward environments remain one of the most challenging settings in reinforcement learning because agents receive meaningful feedback only after completing long sequences of correct actions. In such scenarios, successful learning depends not only on efficient exploration, but also on whether the reward structure provides enough information for policy improvement. Although many exploration strategies have been proposed, including entropy regularization, intrinsic curiosity, and random network distillation, their effectiveness often varies substantially across tasks and reward formulations.
           </p>
 
           <p>
-            A major limitation of existing studies is the lack of a unified evaluation framework. Exploration methods are frequently tested on different environments, reward structures, and evaluation protocols, making fair comparison difficult. Furthermore, commonly used benchmarks such as Atari and classic control tasks are not specifically designed to isolate exploration capability under sparse rewards.
+            A major limitation of existing studies is the lack of a unified evaluation framework. Exploration methods are often tested on different environments, reward designs, and evaluation protocols, making fair comparison difficult. Moreover, commonly used benchmarks such as Atari and classic control tasks are not specifically constructed to examine sparse-reward exploration across tasks with different state and action structures.
           </p>
 
           <p>
-            To address this issue, we develop a sparse-reward benchmark for reinforcement learning exploration. The benchmark evaluates PPO, PPO+ICM, and PPO+RND across multiple sparse-reward environments. We analyze learning curves, success rates, and state visitation patterns to better understand how different exploration mechanisms influence learning performance under sparse-reward settings.
+            To address this issue, we develop a unified sparse-reward benchmark framework for reinforcement learning exploration. The benchmark covers both discrete and continuous-control environments, including Gridworld, FrozenLake, Sparse CartPole, and Meta-World robotic tasks such as Reach and Button. Within a shared training and evaluation pipeline, we compare PPO, PPO+ICM, and PPO+RND using learning curves, success rates, and state visitation patterns. Rather than focusing only on which exploration method performs best, our benchmark is designed to study how exploration mechanisms interact with sparse-reward structures across different task types.
           </p>
 
         </div>
@@ -196,7 +196,7 @@
         <div class="content has-text-justified">
 
           <p>
-            To systematically evaluate exploration under sparse-reward settings, we construct a benchmark consisting of environments with increasing exploration difficulty. All tasks are modified to provide sparse rewards, where agents receive meaningful feedback only after successfully completing the task.
+            To systematically evaluate exploration under sparse-reward settings, we construct a benchmark consisting of multiple environments with different task characteristics. Rather than relying on a single reward formulation, the benchmark includes strict sparse rewards, milestone-based rewards, and weak dense shaping in selected tasks, allowing us to study how exploration methods behave under different forms of task guidance.
           </p>
 
           <p>
@@ -212,7 +212,7 @@
           </p>
 
           <p>
-            <strong>Meta-World Reach-v3</strong> and <strong>Meta-World Push-v3</strong> are robotic manipulation tasks used to evaluate exploration in high-dimensional continuous control settings. Dense reward shaping is removed to create challenging sparse-reward versions of the tasks, requiring agents to discover successful behaviors with limited external feedback.
+            <strong>Meta-World Reach-v3</strong> and <strong>Meta-World Push-v3</strong> are robotic manipulation tasks used to evaluate exploration in high-dimensional continuous-control settings. These tasks are studied under sparse or semi-sparse reward formulations, including strict sparse rewards, milestone-based rewards, and weak dense shaping in selected settings. This design allows us to examine how different exploration methods behave when task feedback is limited or only weakly informative.
           </p>
 
           <p>
@@ -235,19 +235,19 @@
         <div class="content has-text-justified">
 
           <p>
-            We use Proximal Policy Optimization (PPO) as the base reinforcement learning algorithm across all benchmark environments. To study the effect of exploration under sparse rewards, we compare the standard PPO baseline with two intrinsic motivation methods: Intrinsic Curiosity Module (ICM) and Random Network Distillation (RND).
+            We use Proximal Policy Optimization (PPO) as the base reinforcement learning algorithm across all benchmark environments. To study exploration under sparse rewards, we compare an entropy-regularized PPO baseline with two intrinsic motivation methods: Intrinsic Curiosity Module (ICM) and Random Network Distillation (RND).
           </p>
 
           <p>
-            <strong>PPO Baseline.</strong> PPO learns a policy by optimizing a clipped surrogate objective, which improves training stability by limiting large policy updates. In our benchmark, PPO serves as the reference method for evaluating how well a standard policy-gradient algorithm performs under sparse reward settings.
+            <strong>Entropy-Regularized PPO Baseline.</strong> PPO learns a policy by optimizing a clipped surrogate objective, which improves training stability by limiting large policy updates. In our benchmark, the PPO baseline also includes entropy regularization, which encourages stochastic action selection and provides a simple implicit exploration mechanism. This baseline serves as the reference method for evaluating how well a standard policy-gradient algorithm can learn under sparse-reward settings without additional intrinsic reward modules.
           </p>
 
           <p>
-            <strong>PPO + ICM.</strong> The Intrinsic Curiosity Module provides additional intrinsic rewards based on prediction errors in the learned dynamics model. The agent is encouraged to visit states where its forward model cannot accurately predict the next feature representation.
+            <strong>Entropy-Regularized PPO + ICM.</strong> The Intrinsic Curiosity Module provides additional intrinsic rewards based on prediction errors in a learned dynamics model. The agent is encouraged to visit states where its forward model cannot accurately predict the next feature representation. In our benchmark, ICM is added on top of the same entropy-regularized PPO training framework, allowing us to evaluate whether curiosity-driven intrinsic rewards improve exploration beyond the baseline stochastic policy.
           </p>
 
           <p>
-            <strong>PPO + RND.</strong> Random Network Distillation generates intrinsic rewards from the prediction error between a fixed random target network and a trainable predictor network. States that are novel to the agent produce larger prediction errors and therefore higher exploration bonuses.
+            <strong>Entropy-Regularized PPO + RND.</strong> Random Network Distillation generates intrinsic rewards from the prediction error between a fixed random target network and a trainable predictor network. States that are novel to the agent produce larger prediction errors and therefore higher exploration bonuses. As with ICM, RND is combined with the same entropy-regularized PPO backbone so that differences in performance can be attributed more directly to the intrinsic exploration mechanism.
           </p>
 
           <p>
@@ -278,11 +278,7 @@
           </p>
 
           <p>
-            For high-dimensional continuous-control tasks such as Meta-World Reach-v3, a fully binary sparse reward can make learning extremely unstable because the agent may rarely encounter successful states during early training. Therefore, we use a controlled sparse-reward setting with milestone-based rewards for approaching the target and a very small dense shaping term of 0.005. This auxiliary reward is used only to provide minimal guidance and stabilize training, while the main learning objective remains success-oriented.
-          </p>
-
-          <p>
-            This design allows us to compare exploration methods under challenging reward conditions while avoiding completely uninformative training signals in continuous robotic manipulation tasks.
+            For high-dimensional continuous-control tasks such as Meta-World Reach-v3, a fully binary sparse reward often makes learning highly unstable because successful states are rarely encountered during early training. Therefore, we investigate multiple sparse or semi-sparse reward designs for Reach-v3, including milestone-based rewards and a weak dense shaping term of <code>0.005</code>. These settings allow us to examine how different forms of limited task guidance influence the learning behavior of PPO, ICM, and RND.
           </p>
 
           <p>
@@ -485,6 +481,7 @@
             </figcaption>
           </figure>
 
+          <h3 class="title is-4">Meta-World Reach-v3: A result comparison of both basic and milestone reward wrappers with dense shaping</h3>
           <p>
             Comparing all reward settings reveals that a small dense shaping signal plays a critical role in high-dimensional sparse-reward robotic manipulation tasks. Under both the milestone-based and basic-wrapper settings, adding a weak dense reward substantially improves learnability compared with the fully sparse case. However, the results further show that reward structure and exploration mechanism interact strongly. With the basic wrapper and <code>dense_coef = 0.005</code>, the PPO baseline learns the Reach-v3 task most effectively, indicating that a simple and smooth directional reward is already sufficient for stable policy learning. In contrast, when intrinsic exploration modules are introduced, both ICM and RND perform better under the milestone-based wrapper than under the basic wrapper, suggesting that these methods benefit more from structured intermediate progress signals. Overall, the findings indicate that performance is determined not only by whether dense shaping is present, but also by how the reward structure matches the underlying learning mechanism.
           </p>

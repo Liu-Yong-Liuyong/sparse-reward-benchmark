@@ -270,7 +270,7 @@
         <div class="content has-text-justified">
 
           <p>
-            All experiments are conducted under sparse-reward settings to evaluate how different exploration strategies affect learning performance. We compare PPO, PPO+ICM, and PPO+RND across multiple benchmark environments, including discrete navigation tasks, classic control tasks, and robotic manipulation tasks.
+            All experiments are conducted under sparse-reward settings or semi-sparse reward setting to evaluate how different exploration strategies affect learning performance. We compare PPO baseline, PPO+ICM, and PPO+RND across multiple benchmark environments, including discrete navigation tasks, classic control tasks, and robotic manipulation tasks.
           </p>
 
           <p>
@@ -344,11 +344,11 @@
           <h3 class="title is-4">Meta-World Reach-v3: Pure Sparse Reward</h3>
 
           <p>
-            We first evaluate Meta-World Reach-v3 under a pure sparse-reward setting. In this setting, the original dense reward is removed, and the agent receives a reward only when the target is successfully reached. This makes the task significantly more difficult than FrozenLake because most interactions provide no external learning signal.
+            We first evaluate Meta-World Reach-v3 under a pure sparse-reward setting. In this setting, the original dense reward is removed, and the agent receives a reward only when the target is successfully reached. This makes the task significantly more difficult than original Meta-World setting.
           </p>
 
           <p>
-            The learning curves show that PPO occasionally discovers successful trajectories, especially in the later stage of training, leading to several spikes in success rate and average return. However, the performance remains unstable. ICM shows a short early improvement but fails to maintain consistent success, while RND shows almost no successful learning under this setting.
+            The learning curves show that PPO occasionally discovers successful trajectories, especially in the later stage of training, leading to several spikes in success rate and average return. However, the performance remains unstable. RND shows a short early improvement but fails to maintain consistent success, while ICM shows almost no successful learning under this setting.
           </p>
 
           <figure class="image">
@@ -376,7 +376,7 @@
           <h3 class="title is-4">Meta-World Reach-v3: Basic Wrapper with Weak Dense Shaping</h3>
 
           <p>
-            In this Reach-v3 experiment, we replace the milestone-based reward design with a simpler basic reward wrapper and introduce a weak dense shaping term with <code>dense_coef = 0.005</code>. Compared with the milestone setting, this wrapper provides a smoother and more direct learning signal, while still remaining much weaker than a fully dense reward formulation.
+            In this Reach-v3 experiment, we introduce a weak dense shaping term with <code>dense_coef = 0.005</code> to the pure sparse reward wrapper. Compared with the pure sparse reward setting, this way provides a smoother and more direct learning signal, while still remaining much weaker than a fully dense reward formulation.
           </p>
 
           <p>
@@ -442,7 +442,7 @@
           </figure>
 
           <p>
-            Compared with the pure sparse-reward setting, milestone rewards provide limited improvement but are still not sufficient to produce stable learning. The results suggest that reaching tasks in high-dimensional continuous-control environments require more informative guidance than sparse success signals or discrete milestone rewards alone. Without dense shaping, the agent may discover the target occasionally, but it struggles to maintain a stable policy.
+            Compared with the pure sparse-reward setting, milestone rewards do not provide improvement and are still not sufficient to produce stable learning. The results suggest that reaching tasks in high-dimensional continuous-control environments require more informative guidance than sparse success signals or discrete milestone rewards alone. Without dense shaping, the agent may discover the target occasionally, but it struggles to maintain a stable policy.
           </p>
 
           <h3 class="title is-4">Meta-World Reach-v3: Milestone Reward with Dense Shaping (0.005)</h3>
@@ -467,7 +467,7 @@
           </p>
 
           <p>
-            RND exhibits the highest visitation frequency around the target neighborhood, but this does not translate into the best success rate. This suggests that reaching or passing through the target region is not sufficient for successful reaching; the agent must also learn a stable control policy that consistently satisfies the success condition.
+            RND exhibits the higher visitation frequency around the target neighborhood, but this does not translate into the best success rate. This suggests that reaching or passing through the target region is not sufficient for successful reaching; the agent must also learn a stable control policy that consistently satisfies the success condition.
           </p>
 
           <p>

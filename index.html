@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <!-- Primary Meta Tags -->
   <!-- TODO: Replace with your paper title and author names -->
-  <meta name="title" content="Sparse Reward Benchmark for Reinforcement Learning Exploration - Yong Liu, Po-Feng Pan, Yi-Jen Lin">
+  <meta name="title"
+    content="Sparse Reward Benchmark for Reinforcement Learning Exploration - Yong Liu, Po-Feng Pan, Yi-Jen Lin">
   <!-- TODO: Write a compelling 150-160 character description of your research -->
-  <meta name="description" content="A benchmark study comparing PPO, ICM, and RND under sparse reward settings across classic control and a few robotic tasks.">
+  <meta name="description"
+    content="A benchmark study comparing PPO, ICM, and RND under sparse reward settings across classic control and a few robotic tasks.">
   <!-- TODO: Add 5-10 relevant keywords for your research area -->
-  <meta name="keywords" content="Reinforcement learning, Sparse reward, Exploration, PPO, ICM, RND, Meta-World, Benchmark, Robotics">
+  <meta name="keywords"
+    content="Reinforcement learning, Sparse reward, Exploration, PPO, ICM, RND, Meta-World, Benchmark, Robotics">
   <!-- TODO: List all authors -->
   <meta name="author" content="Yong Liu, Po-Feng Pan, Yi-Jen Lin">
   <meta name="robots" content="index, follow">
   <meta name="language" content="English">
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
   <!-- TODO: Replace with your institution or lab name -->
@@ -23,9 +27,10 @@
   <!-- TODO: Same as paper title above -->
   <meta property="og:title" content="Sparse Reward Benchmark for Reinforcement Learning Exploration">
   <!-- TODO: Same as description above -->
-  <meta property="og:description" content="A benchmark study comparing PPO, ICM, and RND under sparse reward settings across classic control and a few robotic tasks.">
+  <meta property="og:description"
+    content="A benchmark study comparing PPO, ICM, and RND under sparse reward settings across classic control and a few robotic tasks.">
   <!-- TODO: Replace with your actual website URL -->
-  
+
   <meta property="og:url" content="https://liu-yong-liuyong.github.io/sparse-reward-benchmark/">
   <!--
   <meta property="og:image" content="https://github.com/Liu-Yong-Liuyong/sparse-reward-benchmark/static/images/social_preview.png">
@@ -39,13 +44,13 @@
   <meta property="article:tag" content="Sparse Reward">
   <meta property="article:tag" content="Exploration">
 
-  
+
   <!-- Additional SEO -->
   <meta name="theme-color" content="#2563eb">
   <meta name="msapplication-TileColor" content="#2563eb">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
+
   <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,22 +60,26 @@
 
 
   <!-- TODO: Replace with your paper title and authors -->
-  <title>Sparse Reward Benchmark for Reinforcement Learning Exploration - Yong Liu, Po-Feng Pan, Yi-Jen Lin | Course Project</title>
-  
+  <title>Sparse Reward Benchmark for Reinforcement Learning Exploration - Yong Liu, Po-Feng Pan, Yi-Jen Lin | Course
+    Project</title>
+
   <!-- Favicon and App Icons -->
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
   <link rel="apple-touch-icon" href="static/images/favicon.ico">
-  
+
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
-  
+
   <!-- Non-critical CSS - Load asynchronously -->
-  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+
   <!-- Fallback for browsers that don't support preload -->
   <noscript>
     <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
@@ -78,10 +87,10 @@
     <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   </noscript>
-  
+
   <!-- Fonts - Optimized loading -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+
   <!-- Defer non-critical JavaScript -->
   <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
@@ -89,7 +98,7 @@
   <script defer src="static/js/bulma-carousel.min.js"></script>
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/index.js"></script>
-  
+
 
   <!-- Scroll to Top Button -->
   <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
@@ -97,733 +106,1265 @@
   </button>
 
   <main id="main-content">
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-
-            <h1 class="title is-1 publication-title">
-              Sparse Reward Benchmark for Reinforcement Learning Exploration
-            </h1>
-
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">Yong Liu,</span>
-              <span class="author-block">Po-Feng Pan,</span>
-              <span class="author-block">Yi-Jen Lin</span>
-            </div>
-
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">
-                Reinforcement Learning Course Project<br>
-                2026
-              </span>
-            </div>
-
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
             <div class="column has-text-centered">
-              <div class="publication-links">
 
-                <span class="link-block">
-                  <a href="https://github.com/Liu-Yong-Liuyong/RL-final-project" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
+              <h1 class="title is-1 publication-title">
+                Sparse Reward Benchmark for Reinforcement Learning Exploration
+              </h1>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">Yong Liu,</span>
+                <span class="author-block">Po-Feng Pan,</span>
+                <span class="author-block">Yi-Jen Lin</span>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  Reinforcement Learning Course Project<br>
+                  2026
                 </span>
+              </div>
 
+              <div class="column has-text-centered">
+                <div class="publication-links">
+
+                  <span class="link-block">
+                    <a href="https://github.com/Liu-Yong-Liuyong/RL-final-project" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Paper abstract -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Sparse rewards remain a major challenge in reinforcement learning because agents receive limited
+                feedback during training, making exploration difficult. In this project, we build a sparse reward
+                benchmark to evaluate how different exploration methods affect learning performance. We compare a PPO
+                baseline with intrinsic motivation methods, including Intrinsic Curiosity Module (ICM) and Random
+                Network Distillation (RND), across classic control and robotic manipulation tasks. The benchmark
+                analyzes success rate, average return, learning curves, and state visitation patterns. Our results show
+                that intrinsic rewards can improve exploration coverage, but better exploration does not always lead to
+                faster task success, highlighting the trade-off between exploration diversity and policy learning
+                efficiency under sparse reward settings.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End paper abstract -->
+
+    <!-- Overview -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Overview</h2>
+            <div class="content has-text-justified">
+
+              <p>
+                Sparse-reward environments remain one of the most challenging settings in reinforcement learning because
+                agents receive meaningful feedback only after completing long sequences of correct actions. In such
+                scenarios, successful learning depends not only on efficient exploration, but also on whether the reward
+                structure provides enough information for policy improvement. Although many exploration strategies have
+                been proposed, including entropy regularization, intrinsic curiosity, and random network distillation,
+                their effectiveness often varies substantially across tasks and reward formulations.
+              </p>
+
+              <p>
+                A major limitation of existing studies is the lack of a unified evaluation framework. Exploration
+                methods are often tested on different environments, reward designs, and evaluation protocols, making
+                fair comparison difficult. Moreover, commonly used benchmarks such as Atari and classic control tasks
+                are not specifically constructed to examine sparse-reward exploration across tasks with different state
+                and action structures.
+              </p>
+
+              <p>
+                To address this issue, we develop a unified sparse-reward benchmark framework for reinforcement learning
+                exploration. The benchmark covers both discrete and continuous-control environments, including
+                Gridworld, FrozenLake, Sparse CartPole, and Meta-World robotic tasks such as Reach and Button. Within a
+                shared training and evaluation pipeline, we compare PPO, PPO+ICM, and PPO+RND using learning curves,
+                success rates, and state visitation patterns. Rather than focusing only on which exploration method
+                performs best, our benchmark is designed to study how exploration mechanisms interact with sparse-reward
+                structures across different task types.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Overview -->
+
+    <!-- Benchmark Tasks -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Benchmark Tasks</h2>
+            <div class="content has-text-justified">
+
+              <p>
+                To systematically evaluate exploration under sparse-reward settings, we construct a benchmark consisting
+                of multiple environments with different task characteristics. Rather than relying on a single reward
+                formulation, the benchmark includes strict sparse rewards, milestone-based rewards, and weak dense
+                shaping in selected tasks, allowing us to study how exploration methods behave under different forms of
+                task guidance.
+              </p>
+
+              <p>
+                <strong>Sparse Gridworld</strong> is a deterministic navigation environment in which the agent must
+                discover a distant goal state without intermediate rewards. This task provides a simple setting for
+                visualizing state coverage and exploration behavior.
+              </p>
+
+              <p>
+                <strong>FrozenLake</strong> introduces stochastic transitions, making exploration more challenging and
+                allowing us to evaluate the robustness of exploration methods under environmental randomness.
+              </p>
+
+              <p>
+                <strong>Sparse CartPole</strong> extends the classic CartPole control problem by replacing dense rewards
+                with sparse success signals. This environment combines sparse feedback with continuous-state dynamics.
+              </p>
+
+              <p>
+                <strong>Meta-World Reach-v3</strong> and <strong>Meta-World Button-Press-v3</strong> are robotic
+                manipulation tasks used to evaluate exploration in high-dimensional continuous-control settings. These
+                tasks are studied under sparse or semi-sparse reward formulations, including strict sparse rewards,
+                milestone-based rewards, and weak dense shaping in selected settings. This design allows us to examine
+                how different exploration methods behave when task feedback is limited or only weakly informative.
+              </p>
+
+              <p>
+                Together, these environments provide a diverse evaluation suite spanning discrete navigation, stochastic
+                exploration, classic control, and robotic manipulation.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Benchmark Tasks -->
+
+    <!-- Methods -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Methods</h2>
+            <div class="content has-text-justified">
+
+              <p>
+                We use Proximal Policy Optimization (PPO) as the base reinforcement learning algorithm across all
+                benchmark environments. To study exploration under sparse rewards, we compare an entropy-regularized PPO
+                baseline with two intrinsic motivation methods: Intrinsic Curiosity Module (ICM) and Random Network
+                Distillation (RND).
+              </p>
+
+              <p>
+                <strong>Entropy-Regularized PPO Baseline.</strong> PPO learns a policy by optimizing a clipped surrogate
+                objective, which improves training stability by limiting large policy updates. In our benchmark, the PPO
+                baseline also includes entropy regularization, which encourages stochastic action selection and provides
+                a simple implicit exploration mechanism. This baseline serves as the reference method for evaluating how
+                well a standard policy-gradient algorithm can learn under sparse-reward settings without additional
+                intrinsic reward modules.
+              </p>
+
+              <p>
+                <strong>Entropy-Regularized PPO + ICM.</strong> The Intrinsic Curiosity Module provides additional
+                intrinsic rewards based on prediction errors in a learned dynamics model. The agent is encouraged to
+                visit states where its forward model cannot accurately predict the next feature representation. In our
+                benchmark, ICM is added on top of the same entropy-regularized PPO training framework, allowing us to
+                evaluate whether curiosity-driven intrinsic rewards improve exploration beyond the baseline stochastic
+                policy.
+              </p>
+
+              <p>
+                <strong>Entropy-Regularized PPO + RND.</strong> Random Network Distillation generates intrinsic rewards
+                from the prediction error between a fixed random target network and a trainable predictor network.
+                States that are novel to the agent produce larger prediction errors and therefore higher exploration
+                bonuses. As with ICM, RND is combined with the same entropy-regularized PPO backbone so that differences
+                in performance can be attributed more directly to the intrinsic exploration mechanism.
+              </p>
+
+              <p>
+                All methods are trained using the same PPO training interface and evaluated under consistent environment
+                settings, training timesteps, and metrics. This allows us to compare learning performance and
+                exploration behavior across methods in a fair and reproducible way.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Methods -->
+
+    <!-- Experimental Setup -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Experimental Setup</h2>
+            <div class="content has-text-justified">
+
+              <p>
+                All experiments are conducted under sparse-reward settings or semi-sparse reward setting to evaluate how
+                different exploration strategies affect learning performance. We compare PPO baseline, PPO+ICM, and
+                PPO+RND across multiple benchmark environments, including discrete navigation tasks, classic control
+                tasks, and robotic manipulation tasks.
+              </p>
+
+              <p>
+                For discrete and low-dimensional tasks, we adopt pure sparse rewards, where the agent receives external
+                reward only after reaching the goal or completing the task. This setting directly tests whether the
+                agent can discover successful trajectories with minimal feedback.
+              </p>
+
+              <p>
+                For high-dimensional continuous-control tasks such as Meta-World Reach-v3, a fully binary sparse reward
+                often makes learning highly unstable because successful states are rarely encountered during early
+                training. Therefore, we investigate multiple sparse or semi-sparse reward designs for Reach-v3,
+                including milestone-based rewards and a weak dense shaping term of <code>0.005</code>. These settings
+                allow us to examine how different forms of limited task guidance influence the learning behavior of PPO,
+                ICM, and RND.
+              </p>
+
+              <p>
+                To ensure fair comparison, all methods are trained using the same PPO training pipeline, evaluation
+                protocol, and environment configuration whenever possible. Training progress is monitored using success
+                rate, average return, and exponentially weighted moving average (EWMA) success rate.
+              </p>
+
+              <p>
+                In addition to learning curves, we analyze state visitation patterns using heatmaps. These
+                visualizations help reveal whether an exploration method improves state-space coverage and whether
+                broader exploration leads to better task performance.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Experimental Setup -->
+
+    <!-- Results -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Results</h2>
+
+            <div class="content has-text-justified">
+
+              <h3 class="title is-4">FrozenLake</h3>
+
+              <p>
+                In the FrozenLake task, PPO with entropy regularization already achieves strong performance under the
+                sparse-reward setting. However, the learning curves show that intrinsic motivation mainly affects the
+                learning speed rather than the final performance.
+              </p>
+
+              <p>
+                ICM shows the fastest early improvement in EWMA success rate, suggesting that curiosity-driven rewards
+                help the agent discover successful trajectories earlier in training. PPO also reaches a comparable
+                performance level, but its improvement appears later than ICM. In contrast, RND shows the slowest
+                improvement and performs slightly weaker during the early and middle stages of training.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/frozenlake_eval.jpg" alt="FrozenLake learning curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on FrozenLake evaluated every 5,000 steps.
+                </figcaption>
+              </figure>
+
+              <p>
+                The visitation heatmaps show that all methods eventually concentrate their visits along the upper row
+                and right column, which correspond to the dominant successful path toward the goal. PPO and RND exhibit
+                relatively similar final visitation patterns, indicating that both methods mainly exploit the successful
+                route after learning.
+              </p>
+
+              <p>
+                In contrast, ICM shows noticeably higher visitation frequencies around the starting region and nearby
+                states, especially along the upper-left part of the map. This suggests that ICM does not necessarily
+                increase global exploration coverage, but it improves local exploration around early states, which may
+                help the agent discover successful trajectories earlier in training.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/frozenlake_heatmap.jpg" alt="FrozenLake visitation heatmap">
+                <figcaption class="has-text-centered">
+                  State visitation heatmaps after training on FrozenLake.
+                </figcaption>
+              </figure>
+
+              <p>
+                Overall, the FrozenLake results suggest that intrinsic motivation does not significantly improve the
+                final success rate when PPO with entropy regularization already performs well. Instead, ICM mainly
+                improves early learning efficiency, while RND behaves more similarly to PPO and learns more slowly. This
+                highlights the difference between exploration behavior, learning speed, and final task performance in
+                sparse-reward environments.
+              </p>
+
+              <h3 class="title is-4">Meta-World Reach-v3: Pure Sparse Reward</h3>
+
+              <p>
+                We first evaluate Meta-World Reach-v3 under a pure sparse-reward setting. In this setting, the original
+                dense reward is removed, and the agent receives a reward only when the target is successfully reached.
+                This makes the task significantly more difficult than original Meta-World setting.
+              </p>
+
+              <p>
+                The learning curves show that PPO occasionally discovers successful trajectories, especially in the
+                later stage of training, leading to several spikes in success rate and average return. However, the
+                performance remains unstable. RND shows a short early improvement but fails to maintain consistent
+                success, while ICM shows almost no successful learning under this setting.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/rb5.jpg" alt="Meta-World Reach-v3 pure sparse reward learning curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on Meta-World Reach-v3 under the pure sparse-reward setting.
+                </figcaption>
+              </figure>
+
+              <p>
+                The exploration heatmaps further suggest that PPO visits regions closer to the target more frequently,
+                which explains its occasional success. In contrast, ICM and RND tend to concentrate visits around
+                specific workspace regions or boundaries rather than consistently exploring the target area. This
+                indicates that intrinsic rewards do not necessarily produce task-relevant exploration in
+                high-dimensional continuous-control environments.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/reach_basic.jpg"
+                  alt="Meta-World Reach-v3 pure sparse reward exploration heatmaps">
+                <figcaption class="has-text-centered">
+                  Exploration heatmaps of Meta-World Reach-v3 under the pure sparse-reward setting.
+                </figcaption>
+              </figure>
+
+              <p>
+                Overall, the Reach-v3 results show that pure sparse rewards make robotic manipulation substantially
+                harder than discrete navigation tasks. Unlike FrozenLake, where all methods eventually learn reasonable
+                policies, Reach-v3 requires more informative exploration guidance. This motivates the use of controlled
+                sparse rewards or weak shaping terms in later experiments to stabilize training while still preserving
+                the sparse-reward challenge.
+              </p>
+
+              <h3 class="title is-4">Meta-World Reach-v3: Basic Wrapper with Weak Dense Shaping</h3>
+
+              <p>
+                In this Reach-v3 experiment, we introduce a weak dense shaping term with <code>dense_coef = 0.005</code>
+                to the pure sparse reward wrapper. Compared with the pure sparse reward setting, this way provides a
+                smoother and more direct learning signal, while still remaining much weaker than a fully dense reward
+                formulation.
+              </p>
+
+              <p>
+                The learning curves show that the PPO baseline performs best under this setting. PPO reaches high
+                success rates more quickly and achieves the most stable improvement in both success rate and EWMA
+                success rate. ICM also learns the task to some extent, but its improvement is slower and less stable
+                than PPO. In contrast, RND performs the worst: although it occasionally reaches moderate success rates,
+                it fails to maintain consistent progress and does not converge as reliably as the other two methods.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/rb0.005_5.jpg"
+                  alt="Meta-World Reach-v3 basic wrapper with weak dense shaping learning curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on Meta-World Reach-v3 using a basic reward wrapper with weak dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                The exploration heatmaps further support this observation. PPO shows a concentrated visitation pattern
+                around the target region across the x-y, x-z, and y-z projections, indicating that the weak dense
+                shaping term is already sufficient to guide the policy toward effective reaching behavior. ICM also
+                explores around the target region, but its visitation pattern is more diffuse, suggesting that
+                curiosity-driven exploration does not translate into equally efficient exploitation. RND appears
+                visually concentrated in some projections, but this does not lead to strong learning performance.
+              </p>
+
+              <p>
+                In particular, PPO exhibits the clearest alignment between target-centered exploration and final task
+                success. ICM reaches similar task-relevant regions, but its visitation remains broader and less stable.
+                RND, despite sometimes showing seemingly focused exploration heatmaps, fails to convert this exploration
+                pattern into sustained reaching success. This suggests that a visually concentrated exploration map does
+                not necessarily imply faster or better policy learning.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/rbasic_0.005.jpg"
+                  alt="Meta-World Reach-v3 basic wrapper with weak dense shaping exploration heatmaps">
+                <figcaption class="has-text-centered">
+                  Exploration heatmaps of Meta-World Reach-v3 using a basic reward wrapper with weak dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                Overall, these results indicate that, in the Reach-v3 task, a simple and smooth reward structure with a
+                very small amount of dense guidance is already sufficient for PPO to learn effectively. Under this
+                semi-sparse setting, the additional intrinsic rewards from ICM and RND do not provide clear advantages,
+                and may even interfere with efficient exploitation. Therefore, for relatively simple reaching tasks,
+                reward design appears to have a stronger influence on performance than the choice of intrinsic
+                exploration module.
+              </p>
+
+              <h3 class="title is-4">Meta-World Reach-v3: Milestone Reward without Dense Shaping</h3>
+
+              <p>
+                In the next Reach-v3 experiment, we introduce a milestone-based reward wrapper that provides additional
+                rewards when the end-effector moves closer to the target. However, the dense shaping reward is still set
+                to zero. This setting provides slightly more guidance than the pure sparse-reward version, but the agent
+                still does not receive continuous distance-based feedback.
+              </p>
+
+              <p>
+                The learning curves show that all methods remain unstable under this setting. PPO and RND achieve short
+                periods of success in the early stage of training, but their success rates quickly drop and do not
+                recover consistently. ICM shows a delayed improvement around the middle stage of training, but the
+                improvement is temporary and does not lead to stable task completion.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/rdc5.jpg"
+                  alt="Meta-World Reach-v3 milestone reward without dense shaping learning curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on Meta-World Reach-v3 using milestone-based rewards without dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                The exploration heatmaps indicate that the agents still concentrate their visits around limited regions
+                of the workspace. Compared with the pure sparse-reward setting, the milestone reward does not clearly
+                shift the visitation distribution toward the target. Instead, PPO, ICM, and RND all show strong
+                concentration near specific boundaries or corners, suggesting that milestone rewards alone are not
+                sufficient to guide stable target-oriented exploration.
+              </p>
+
+              <p>
+                ICM shows particularly strong concentration near the lower-left region, which suggests that
+                curiosity-driven exploration may become trapped in locally novel but task-irrelevant regions. Similarly,
+                PPO and RND do not show a clearly target-centered visitation pattern. This explains why the learning
+                curves only show short success spikes rather than stable improvement.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/reach_dc0.jpg"
+                  alt="Meta-World Reach-v3 milestone reward without dense shaping exploration heatmaps">
+                <figcaption class="has-text-centered">
+                  Exploration heatmaps of Meta-World Reach-v3 using milestone-based rewards without dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                Compared with the pure sparse-reward setting, milestone rewards do not provide improvement and are still
+                not sufficient to produce stable learning. The results suggest that reaching tasks in high-dimensional
+                continuous-control environments require more informative guidance than sparse success signals or
+                discrete milestone rewards alone. Without dense shaping, the agent may discover the target occasionally,
+                but it struggles to maintain a stable policy.
+              </p>
+
+              <h3 class="title is-4">Meta-World Reach-v3: Milestone Reward with Dense Shaping (0.005)</h3>
+
+              <p>
+                In the final Reach-v3 experiment, a small dense shaping reward of 0.005 is added on top of the
+                milestone-based reward. Although the shaping reward is extremely small compared with the success reward,
+                it significantly changes the learning dynamics of all methods.
+              </p>
+
+              <p>
+                Compared with the pure sparse-reward and milestone-only settings, all methods achieve substantially
+                higher success rates. PPO reaches an EWMA success rate above 0.8 earlier than the intrinsic-motivation
+                methods, indicating that the additional dense reward provides sufficient guidance for efficient policy
+                optimization. ICM also achieves strong performance but converges more slowly, while RND requires the
+                longest training time and does not consistently reach the same success level before training terminates.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/r5.jpg" alt="Meta-World Reach-v3 dense shaping learning curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on Meta-World Reach-v3 with milestone rewards and a dense shaping reward of 0.005.
+                </figcaption>
+              </figure>
+
+              <p>
+                The exploration heatmaps reveal distinct behaviors among the three methods. PPO shows the most
+                concentrated visitation pattern around the target region, suggesting that it quickly exploits successful
+                trajectories once the weak dense reward provides useful guidance.
+              </p>
+
+              <p>
+                RND exhibits the higher visitation frequency around the target neighborhood, but this does not translate
+                into the best success rate. This suggests that reaching or passing through the target region is not
+                sufficient for successful reaching; the agent must also learn a stable control policy that consistently
+                satisfies the success condition.
+              </p>
+
+              <p>
+                ICM appears to visit the target neighborhood less frequently than RND, but it achieves better learning
+                performance. This indicates that ICM may convert exploration into more stable reaching behavior, while
+                RND may continue novelty-seeking around the target and delay exploitation. Overall, these results
+                highlight that target-region coverage and final task success are related but not equivalent.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/reach.jpg" alt="Meta-World Reach-v3 dense shaping exploration heatmaps">
+                <figcaption class="has-text-centered">
+                  Exploration heatmaps of Meta-World Reach-v3 with milestone rewards and a dense shaping reward of
+                  0.005.
+                </figcaption>
+              </figure>
+
+              <h3 class="title is-4">Meta-World Reach-v3: A result comparison of both basic and milestone reward
+                wrappers with dense shaping</h3>
+              <p>
+                Comparing all reward settings reveals that a small dense shaping signal plays a critical role in
+                high-dimensional sparse-reward robotic manipulation tasks. Under both the milestone-based and
+                basic-wrapper settings, adding a weak dense reward substantially improves learnability compared with the
+                fully sparse case. However, the results further show that reward structure and exploration mechanism
+                interact strongly. With the basic wrapper and <code>dense_coef = 0.005</code>, the PPO baseline learns
+                the Reach-v3 task most effectively, indicating that a simple and smooth directional reward is already
+                sufficient for stable policy learning. In contrast, when intrinsic exploration modules are introduced,
+                both ICM and RND perform better under the milestone-based wrapper than under the basic wrapper,
+                suggesting that these methods benefit more from structured intermediate progress signals. Overall, the
+                findings indicate that performance is determined not only by whether dense shaping is present, but also
+                by how the reward structure matches the underlying learning mechanism.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/c1.jpg"
+                  alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for PPO">
+                <figcaption class="has-text-centered">
+                  Success-rate comparison between milestone and basic reward wrappers for PPO on Meta-World Reach-v3,
+                  both using weak dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                For the PPO baseline, the basic wrapper produces faster and more stable learning than the milestone
+                wrapper. This suggests that, without intrinsic exploration, PPO benefits most from a simple and smooth
+                reward landscape that directly provides directional guidance.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/c2.jpg"
+                  alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for ICM">
+                <figcaption class="has-text-centered">
+                  Success-rate comparison between milestone and basic reward wrappers for PPO + ICM on Meta-World
+                  Reach-v3, both using weak dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                After adding ICM, the trend reverses. The milestone wrapper substantially outperforms the basic wrapper,
+                indicating that curiosity-driven exploration benefits more from structured intermediate progress signals
+                than from a purely smooth reward design.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/c3.jpg"
+                  alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for RND">
+                <figcaption class="has-text-centered">
+                  Success-rate comparison between milestone and basic reward wrappers for PPO + RND on Meta-World
+                  Reach-v3, both using weak dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                A similar pattern is observed for RND. The milestone wrapper again performs better than the basic
+                wrapper, suggesting that novelty-driven exploration also requires more explicit task structure in order
+                to convert exploration into stable task success.
+              </p>
+              <h3 class="title is-4">Sparse Gridworld</h3>
+              <p>
+                Sparse Gridworld is a simple, deterministic navigation environment where the agent must bypass obstacles
+                to reach a goal. While all three methods (PPO, PPO+ICM, and PPO+RND) eventually find the optimal path,
+                their learning speeds and exploration behaviors differ significantly depending on the grid size and the
+                number of obstacles.
+              </p>
+
+              <h4 class="title is-5">20×20 Gridworld with Obstacles</h4>
+              <p>
+                In the 20×20 environment with 25 random obstacles, PPO+ICM is the fastest to reach an EWMA success rate
+                of 0.8. The standard PPO baseline is slightly slower, while PPO+RND struggles the most, taking nearly 1M
+                steps to reach the same level.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/gridworld/gridworld_20x20_success_curve.png"
+                  alt="20x20 Gridworld success rate curves">
+                <figcaption class="has-text-centered">
+                  Learning curves (EWMA success rate) on the 20×20 Gridworld with 25 obstacles.
+                </figcaption>
+              </figure>
+
+              <p>
+                When looking at the visitation heatmaps, standard PPO leaves 22 cells in the top-right corner completely
+                unvisited (marked in black). On the other hand, ICM and RND explore more broadly, leaving only 9
+                unvisited cells.
+              </p>
+
+              <div class="columns is-centered">
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/none_20x20_gridworld_obstacles_visitcount.png"
+                      alt="PPO Visitation Count">
+                    <figcaption class="has-text-centered">PPO - Visitation Count</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/icm_20x20_gridworld_obstacles_visitcount.png"
+                      alt="ICM Visitation Count">
+                    <figcaption class="has-text-centered">PPO+ICM - Visitation Count</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/rnd_20x20_gridworld_obstacles_visitcount.png"
+                      alt="RND Visitation Count">
+                    <figcaption class="has-text-centered">PPO+RND - Visitation Count</figcaption>
+                  </figure>
+                </div>
+              </div>
+
+              <div class="columns is-centered">
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/none_20x20_gridworld_obstacles_firstvisit.png"
+                      alt="PPO First Visit Step">
+                    <figcaption class="has-text-centered">PPO - First Visit Step</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/icm_20x20_gridworld_obstacles_firstvisit.png"
+                      alt="ICM First Visit Step">
+                    <figcaption class="has-text-centered">PPO+ICM - First Visit Step</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/rnd_20x20_gridworld_obstacles_firstvisit.png"
+                      alt="RND First Visit Step">
+                    <figcaption class="has-text-centered">PPO+RND - First Visit Step</figcaption>
+                  </figure>
+                </div>
+              </div>
+
+              <p>
+                Interestingly, ICM's exploration pattern looks very similar to standard PPO, just with a higher overall
+                exploration rate. RND, however, behaves completely differently: it ignores the bottom-left region early
+                on and only explores the lower and top-right sections much later in the training process.
+              </p>
+
+              <h4 class="title is-5">50×50 Gridworld: Obstacle-Free Exploration</h4>
+              <p>
+                When we scale up to a 50×50 grid without any obstacles, standard PPO actually reaches the 0.8 success
+                rate faster than PPO+ICM. ICM is the first to find the goal (around 206k steps) due to its intrinsic
+                curiosity. However, because of this same curiosity, it keeps exploring the rest of the empty map instead
+                of focusing on the goal. As a result, PPO overtakes it and stabilizes first. Meanwhile, PPO+RND has a
+                success rate of 0 until almost 1M steps.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/gridworld/gridworld_50x50_none_success_curve.png"
+                  alt="50x50 Gridworld obstacle-free curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on the 50×50 obstacle-free Gridworld.
+                </figcaption>
+              </figure>
+
+              <p>
+                The Visitation Count heatmaps show that ICM visits the goal area quite often (the yellow area near the
+                target). Standard PPO leaves larger parts of the map unexplored.
+              </p>
+
+              <div class="columns is-centered">
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/none_50x50_gridworld_visitcount.png"
+                      alt="PPO Visitation Count 50x50">
+                    <figcaption class="has-text-centered">PPO - Visitation Count</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/icm_50x50_gridworld_visitcount.png"
+                      alt="ICM Visitation Count 50x50">
+                    <figcaption class="has-text-centered">PPO+ICM - Visitation Count</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/rnd_50x50_gridworld_visitcount.png"
+                      alt="RND Visitation Count 50x50">
+                    <figcaption class="has-text-centered">PPO+RND - Visitation Count</figcaption>
+                  </figure>
+                </div>
+              </div>
+
+              <p>
+                RND shows a very strange behavior here: it spends almost all of its time stuck in the corners. This
+                happens because when the agent bumps into a wall and stays in the same place, RND's predictor network
+                still treats it as a prediction error. This gives the agent a "fake curiosity" reward, trapping it in
+                the corners because it's an easy way to get intrinsic rewards without actually exploring.
+              </p>
+
+              <div class="columns is-centered">
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/none_50x50_gridworld_firstvisit.png" alt="PPO First Visit 50x50">
+                    <figcaption class="has-text-centered">PPO - First Visit Step</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/icm_50x50_gridworld_firstvisit.png" alt="ICM First Visit 50x50">
+                    <figcaption class="has-text-centered">PPO+ICM - First Visit Step</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/rnd_50x50_gridworld_firstvisit.png" alt="RND First Visit 50x50">
+                    <figcaption class="has-text-centered">PPO+RND - First Visit Step</figcaption>
+                  </figure>
+                </div>
+              </div>
+
+              <p>
+                The First Visit Step heatmaps show that PPO and ICM share a similar exploration order. RND, however, has
+                a dark blue path leading directly to the goal. This proves that RND actually found the goal very early
+                in training. But because the external sparse reward wasn't strong enough to beat the intrinsic curiosity
+                reward, the agent lost interest in the goal once it was visited. It chose to go back to the corners to
+                bump into walls for easy rewards, which explains why it didn't learn the actual task until 1M steps
+                later.
+              </p>
+
+              <h4 class="title is-5">50×50 Gridworld with High-Density Obstacles</h4>
+              <p>
+                When we add 100 obstacles, the task becomes much harder. Standard PPO is still the fastest to succeed,
+                while RND remains the slowest. However, the obstacles force PPO and ICM to take significantly more steps
+                to learn. Since RND was already very slow in the empty map, the obstacles didn't add as much extra
+                training time for it, bringing the final completion times of all three methods somewhat closer together.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/gridworld/gridworld_50x50_obstacles_success_curve.png"
+                  alt="50x50 Gridworld with obstacles curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on the 50×50 Gridworld with 100 obstacles.
+                </figcaption>
+              </figure>
+
+              <p>
+                While the Visitation Count heatmaps look somewhat similar to the empty map, the First Visit Step
+                heatmaps highlight a big difference in how fast they explore.
+              </p>
+
+              <div class="columns is-centered">
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/none_50x50_gridworld_obstacles_visitcount.png"
+                      alt="PPO Visit Count Obstacles">
+                    <figcaption class="has-text-centered">PPO - Visitation Count</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/icm_50x50_gridworld_obstacles_visitcount.png"
+                      alt="ICM Visit Count Obstacles">
+                    <figcaption class="has-text-centered">PPO+ICM - Visitation Count</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/rnd_50x50_gridworld_obstacles_visitcount.png"
+                      alt="RND Visit Count Obstacles">
+                    <figcaption class="has-text-centered">PPO+RND - Visitation Count</figcaption>
+                  </figure>
+                </div>
+              </div>
+
+              <p>
+                Because the agents have to avoid walls, standard PPO takes over 600k steps to explore most of the map,
+                and still misses some spots. In contrast, ICM manages to explore the entire map in just 300k to 350k
+                steps. This shows that ICM's curiosity is very good at helping the agent navigate around complex
+                dead-ends.
+              </p>
+
+              <div class="columns is-centered">
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/none_50x50_gridworld_obstacles_firstvisit.png"
+                      alt="PPO First Visit Obstacles">
+                    <figcaption class="has-text-centered">PPO - First Visit Step</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/icm_50x50_gridworld_obstacles_firstvisit.png"
+                      alt="ICM First Visit Obstacles">
+                    <figcaption class="has-text-centered">PPO+ICM - First Visit Step</figcaption>
+                  </figure>
+                </div>
+                <div class="column is-one-third">
+                  <figure class="image">
+                    <img src="static/images/gridworld/rnd_50x50_gridworld_obstacles_firstvisit.png"
+                      alt="RND First Visit Obstacles">
+                    <figcaption class="has-text-centered">PPO+RND - First Visit Step</figcaption>
+                  </figure>
+                </div>
+              </div>
+
+              <p>
+                RND again shows a different pattern. It finds the goal and maps out some sub-paths very early on.
+                However, just like in the empty map, it struggles to turn this early discovery into a stable policy. It
+                still takes over 1M steps for RND to consistently succeed.
+              </p>
+
+              <h4 class="title is-5">Summary of Sparse Gridworld Findings</h4>
+              <p>
+                The Gridworld experiments highlight a clear trade-off: exploring more doesn't always mean learning
+                faster. Intrinsic motivation methods like ICM are great at helping the agent discover the goal quickly
+                in smaller maps. However, in larger environments, too much curiosity can be a distraction. ICM spends
+                too much time exploring empty spaces instead of just going to the goal, and RND can easily fall into the
+                trap of bumping into boundaries for easy rewards. This shows that while intrinsic rewards increase
+                exploration coverage, the agent still needs to balance its curiosity with actually solving the task.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Results -->
+
+
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Appendix A. Implementation Details</h2>
+            <div class="content has-text-justified">
+              <h3 class="title is-4">A.1 PPO Training Pipeline</h3>
+
+              <p>
+                The PPO training procedure is implemented through a lightweight utility function named
+                <code>run_ppo</code>. This function is responsible for constructing the PPO model, launching training,
+                and saving the final checkpoint for later evaluation. The output path is first converted into a
+                <code>Path</code> object, and the corresponding directory is created if necessary. A Stable-Baselines3
+                PPO model is then initialized using the target environment and the hyperparameters specified in the
+                configuration file.
+              </p>
+
+              <p>
+                After initialization, the model is trained through the <code>learn</code> function for a predefined
+                number of timesteps. Optional callbacks can be attached to the training loop, allowing modules such as
+                EWMA-based evaluation, ICM updates, or RND updates to be executed periodically during training. Once
+                training is complete, the trained model is saved to the designated checkpoint path. This design provides
+                a unified training interface across different benchmark environments and exploration settings.
+              </p>
+
+              <h3 class="title is-4">A.2 Training Script and Configuration</h3>
+
+              <p>
+                The training pipeline is implemented in a central script that loads experiment configurations, builds
+                the environment, applies reward wrappers, initializes exploration modules, and launches PPO training.
+                All experiment settings are defined in YAML configuration files, including environment parameters,
+                wrapper options, agent hyperparameters, training length, output paths, and evaluation settings. This
+                configuration-based design improves reproducibility and allows experiments to be modified without
+                changing the main training logic.
+              </p>
+
+              <p>
+                To reduce run-to-run variation, the training script explicitly sets the random seed for Python, NumPy,
+                and PyTorch. The same seed is also applied when resetting both the training and evaluation environments.
+                After constructing the base environment, the script optionally applies sparse-reward wrappers according
+                to the configuration. Exploration modules are then initialized if enabled.
+              </p>
+
+              <p>
+                Two intrinsic exploration options are supported in the current implementation: Intrinsic Curiosity
+                Module (ICM) and Random Network Distillation (RND). For both methods, the training script initializes
+                the exploration module, its optimizer, and the corresponding callback for periodic updates. For ICM, the
+                script automatically detects whether the action space is discrete or continuous, and sets the action
+                type and action dimension accordingly. This allows the same training pipeline to support both discrete
+                environments such as FrozenLake and continuous-control environments such as Meta-World.
+              </p>
+
+              <p>
+                All active callbacks are collected into a callback list, which may include the ICM update callback, the
+                RND update callback, and the EWMA success evaluation callback. If multiple callbacks are enabled, they
+                are merged into a <code>CallbackList</code> so that they can be executed together during PPO training.
+                This modular design keeps exploration-module optimization separate from policy learning while
+                maintaining a unified overall pipeline.
+              </p>
+
+              <h3 class="title is-4">A.3 Exploration Modules</h3>
+
+              <p>
+                To improve learning under sparse rewards, we incorporate intrinsic exploration mechanisms on top of PPO.
+                Although both methods aim to encourage broader exploration, they provide additional learning signals in
+                different ways.
+              </p>
+
+              <h4 class="title is-5">A.3.1 Intrinsic Curiosity Module (ICM)</h4>
+
+              <p>
+                ICM encourages exploration through transition prediction error. It first maps observations into a latent
+                feature space and then trains a forward model to predict the next-state feature from the current-state
+                feature and the action. The intrinsic reward is computed from the forward prediction error. Transitions
+                that are harder to predict produce larger intrinsic rewards, encouraging the agent to explore less
+                predictable dynamics. In addition, an inverse dynamics model is trained jointly to predict the action
+                from consecutive state features, which helps improve the learned representation.
+              </p>
+
+              <h4 class="title is-5">A.3.2 Random Network Distillation (RND)</h4>
+
+              <p>
+                RND measures novelty through feature prediction mismatch. It uses a fixed randomly initialized target
+                network and a trainable predictor network. For a given observation, the intrinsic reward is defined as
+                the prediction error between the two networks. Observations that are less familiar to the predictor
+                produce larger prediction errors and therefore larger intrinsic rewards. As training proceeds and the
+                predictor learns the visited observations, the intrinsic reward gradually decreases. This mechanism
+                naturally encourages the agent to move toward less familiar regions of the state space.
+              </p>
+
+              <h4 class="title is-5">A.3.3 Comparison of Exploration Signals</h4>
+
+              <p>
+                ICM and RND emphasize novelty in different ways. ICM rewards transitions that are difficult to predict
+                in a learned dynamics model, while RND rewards observations that remain poorly predicted by the
+                predictor network relative to a fixed random target network. Therefore, ICM is more sensitive to
+                transition-level unpredictability, whereas RND mainly captures state novelty through feature prediction
+                mismatch.
+              </p>
+
+              <h3 class="title is-4">A.4 ICM Module Implementation</h3>
+
+              <p>
+                The Intrinsic Curiosity Module is implemented to support both discrete and continuous action spaces
+                within a unified framework. The module first encodes each observation into a latent feature
+                representation through a two-layer multilayer perceptron. This feature representation is then used by
+                both the inverse and forward dynamics models.
+              </p>
+
+              <p>
+                The inverse model takes the concatenation of the current feature and the next-state feature as input and
+                predicts the action that caused the transition. For discrete action spaces, this is formulated as a
+                classification problem using cross-entropy loss. For continuous action spaces, it is formulated as a
+                regression problem using mean squared error.
+              </p>
+
+              <p>
+                The forward model predicts the next-state feature from the current feature and the action. For discrete
+                actions, the action is converted into a one-hot vector before concatenation. For continuous actions, the
+                raw action vector is used directly. The forward model is trained with mean squared error between the
+                predicted next feature and the encoded next feature.
+              </p>
+
+              <p>
+                The intrinsic reward is computed from the forward prediction error. In practice, the raw ICM intrinsic
+                reward is further processed before being added to the extrinsic reward. For continuous-action
+                environments, it is normalized by a running standard deviation to stabilize scale during training.
+                Optional clipping can also be applied before scaling and reward combination. The total ICM loss is
+                defined as a weighted combination of inverse loss and forward loss, controlled by the coefficient
+                <code>beta</code>.
+              </p>
+
+              <h3 class="title is-4">A.5 ICM Update Callback</h3>
+
+              <p>
+                The ICM update callback is used to optimize the Intrinsic Curiosity Module alongside PPO during
+                environment interaction. Instead of updating the module at every step, the callback performs periodic
+                updates according to a predefined update frequency. The exploration wrapper stores transitions of the
+                form <code>(s, a, s')</code> in an internal buffer, and these transitions are retrieved whenever the
+                update condition is met.
+              </p>
+
+              <p>
+                When triggered, the callback converts the stored transitions into batched tensors for current
+                observations, actions, and next observations. The action tensor type is adjusted automatically according
+                to whether the action space is discrete or continuous. The callback then calls the ICM module to compute
+                the inverse loss, forward loss, and total ICM loss. Afterward, a standard gradient update is performed
+                by clearing gradients, backpropagating the loss, and updating the ICM parameters through the optimizer.
+                This optimization process is kept separate from the PPO optimizer, allowing curiosity-model learning and
+                policy learning to proceed in parallel.
+              </p>
+
+              <h3 class="title is-4">A.6 RND Module Implementation</h3>
+
+              <p>
+                The Random Network Distillation module is implemented to generate intrinsic reward based on
+                feature-space prediction error. It consists of two neural networks: a fixed target network and a
+                trainable predictor network. Both networks take the observation as input and output a feature vector of
+                the same dimension.
+              </p>
+
+              <p>
+                The target network is randomly initialized and then frozen throughout training. The predictor network is
+                trained to approximate the target network output. For a given observation, the intrinsic reward is
+                defined as the squared prediction error between the predictor output and the target output. States that
+                are less familiar to the predictor receive higher intrinsic reward, encouraging exploration toward novel
+                observations.
+              </p>
+
+              <p>
+                In the implementation, the raw RND intrinsic reward is normalized by a running standard deviation before
+                being scaled and added to the extrinsic reward. This normalization helps stabilize the novelty signal
+                during training. The RND predictor is optimized using mean squared error loss between the predictor
+                output and the fixed target output.
+              </p>
+
+              <h3 class="title is-4">A.7 RND Update Callback</h3>
+
+              <p>
+                The RND update callback is responsible for training the predictor network during PPO interaction. During
+                rollout collection, the environment wrapper stores observations encountered by the agent. These
+                observations are later retrieved through <code>pop_observations()</code> whenever the callback update
+                condition is satisfied.
+              </p>
+
+              <p>
+                The callback performs updates periodically rather than at every step. When triggered, the stored
+                observations are converted into a tensor batch on the same device as the RND module. The callback then
+                computes the RND loss and updates the predictor network through a standard gradient step. Since the
+                target network remains fixed, only the predictor network is optimized. As the predictor becomes more
+                accurate on frequently visited observations, the intrinsic reward for those states decreases over time.
+              </p>
+
+              <h3 class="title is-4">A.8 Evaluation Pipeline</h3>
+
+              <p>
+                The evaluation module is implemented as a benchmark-oriented utility for testing trained agents under a
+                consistent protocol. The function <code>run_one_episode()</code> executes one full episode in the target
+                environment. During interaction, it records the received rewards, whether the task has been successfully
+                completed, the visited coverage identifiers, and the episode length.
+              </p>
+
+              <p>
+                An episode is considered successful if any visited state during the episode reports
+                <code>success = True</code> in the <code>info</code> dictionary. To evaluate exploration behavior, the
+                evaluator also tracks all unique <code>coverage_id</code> values encountered during the episode and uses
+                their count as the episode-level coverage metric.
+              </p>
+
+              <p>
+                The function <code>evaluate_agent</code> repeatedly runs single-episode evaluation for a predefined
+                number of episodes. It aggregates average return, success rate, average coverage count, and the number
+                of evaluated episodes. This modular evaluation design allows all methods to be compared under the same
+                benchmark criteria.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+    <!-- Image carousel -->
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item">
+              <!-- TODO: Replace with your research result images -->
+              <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy" />
+              <!-- TODO: Replace with description of this result -->
+              <h2 class="subtitle has-text-centered">
+                First image description.
+              </h2>
+            </div>
+            <div class="item">
+              <!-- Your image here -->
+              <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy" />
+              <h2 class="subtitle has-text-centered">
+                Second image description.
+              </h2>
+            </div>
+            <div class="item">
+              <!-- Your image here -->
+              <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy" />
+              <h2 class="subtitle has-text-centered">
+                Third image description.
+              </h2>
+            </div>
+            <div class="item">
+              <!-- Your image here -->
+              <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy" />
+              <h2 class="subtitle has-text-centered">
+                Fourth image description.
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End image carousel -->
+
+
+
+
+    <!-- Youtube video -->
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container">
+          <!-- Paper video. -->
+          <h2 class="title is-3">Video Presentation</h2>
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+
+              <div class="publication-video">
+                <!-- TODO: Replace with your YouTube video ID -->
+                <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0"
+                  allow="autoplay; encrypted-media" allowfullscreen></iframe>
               </div>
             </div>
-
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Sparse rewards remain a major challenge in reinforcement learning because agents receive limited feedback during training, making exploration difficult. In this project, we build a sparse reward benchmark to evaluate how different exploration methods affect learning performance. We compare a PPO baseline with intrinsic motivation methods, including Intrinsic Curiosity Module (ICM) and Random Network Distillation (RND), across classic control and robotic manipulation tasks. The benchmark analyzes success rate, average return, learning curves, and state visitation patterns. Our results show that intrinsic rewards can improve exploration coverage, but better exploration does not always lead to faster task success, highlighting the trade-off between exploration diversity and policy learning efficiency under sparse reward settings.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
-
-<!-- Overview -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Overview</h2>
-        <div class="content has-text-justified">
-
-          <p>
-            Sparse-reward environments remain one of the most challenging settings in reinforcement learning because agents receive meaningful feedback only after completing long sequences of correct actions. In such scenarios, successful learning depends not only on efficient exploration, but also on whether the reward structure provides enough information for policy improvement. Although many exploration strategies have been proposed, including entropy regularization, intrinsic curiosity, and random network distillation, their effectiveness often varies substantially across tasks and reward formulations.
-          </p>
-
-          <p>
-            A major limitation of existing studies is the lack of a unified evaluation framework. Exploration methods are often tested on different environments, reward designs, and evaluation protocols, making fair comparison difficult. Moreover, commonly used benchmarks such as Atari and classic control tasks are not specifically constructed to examine sparse-reward exploration across tasks with different state and action structures.
-          </p>
-
-          <p>
-            To address this issue, we develop a unified sparse-reward benchmark framework for reinforcement learning exploration. The benchmark covers both discrete and continuous-control environments, including Gridworld, FrozenLake, Sparse CartPole, and Meta-World robotic tasks such as Reach and Button. Within a shared training and evaluation pipeline, we compare PPO, PPO+ICM, and PPO+RND using learning curves, success rates, and state visitation patterns. Rather than focusing only on which exploration method performs best, our benchmark is designed to study how exploration mechanisms interact with sparse-reward structures across different task types.
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Overview -->
-
-<!-- Benchmark Tasks -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Benchmark Tasks</h2>
-        <div class="content has-text-justified">
-
-          <p>
-            To systematically evaluate exploration under sparse-reward settings, we construct a benchmark consisting of multiple environments with different task characteristics. Rather than relying on a single reward formulation, the benchmark includes strict sparse rewards, milestone-based rewards, and weak dense shaping in selected tasks, allowing us to study how exploration methods behave under different forms of task guidance.
-          </p>
-
-          <p>
-            <strong>Sparse Gridworld</strong> is a deterministic navigation environment in which the agent must discover a distant goal state without intermediate rewards. This task provides a simple setting for visualizing state coverage and exploration behavior.
-          </p>
-
-          <p>
-            <strong>FrozenLake</strong> introduces stochastic transitions, making exploration more challenging and allowing us to evaluate the robustness of exploration methods under environmental randomness.
-          </p>
-
-          <p>
-            <strong>Sparse CartPole</strong> extends the classic CartPole control problem by replacing dense rewards with sparse success signals. This environment combines sparse feedback with continuous-state dynamics.
-          </p>
-
-          <p>
-            <strong>Meta-World Reach-v3</strong> and <strong>Meta-World Push-v3</strong> are robotic manipulation tasks used to evaluate exploration in high-dimensional continuous-control settings. These tasks are studied under sparse or semi-sparse reward formulations, including strict sparse rewards, milestone-based rewards, and weak dense shaping in selected settings. This design allows us to examine how different exploration methods behave when task feedback is limited or only weakly informative.
-          </p>
-
-          <p>
-            Together, these environments provide a diverse evaluation suite spanning discrete navigation, stochastic exploration, classic control, and robotic manipulation.
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Benchmark Tasks -->
-
-<!-- Methods -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Methods</h2>
-        <div class="content has-text-justified">
-
-          <p>
-            We use Proximal Policy Optimization (PPO) as the base reinforcement learning algorithm across all benchmark environments. To study exploration under sparse rewards, we compare an entropy-regularized PPO baseline with two intrinsic motivation methods: Intrinsic Curiosity Module (ICM) and Random Network Distillation (RND).
-          </p>
-
-          <p>
-            <strong>Entropy-Regularized PPO Baseline.</strong> PPO learns a policy by optimizing a clipped surrogate objective, which improves training stability by limiting large policy updates. In our benchmark, the PPO baseline also includes entropy regularization, which encourages stochastic action selection and provides a simple implicit exploration mechanism. This baseline serves as the reference method for evaluating how well a standard policy-gradient algorithm can learn under sparse-reward settings without additional intrinsic reward modules.
-          </p>
-
-          <p>
-            <strong>Entropy-Regularized PPO + ICM.</strong> The Intrinsic Curiosity Module provides additional intrinsic rewards based on prediction errors in a learned dynamics model. The agent is encouraged to visit states where its forward model cannot accurately predict the next feature representation. In our benchmark, ICM is added on top of the same entropy-regularized PPO training framework, allowing us to evaluate whether curiosity-driven intrinsic rewards improve exploration beyond the baseline stochastic policy.
-          </p>
-
-          <p>
-            <strong>Entropy-Regularized PPO + RND.</strong> Random Network Distillation generates intrinsic rewards from the prediction error between a fixed random target network and a trainable predictor network. States that are novel to the agent produce larger prediction errors and therefore higher exploration bonuses. As with ICM, RND is combined with the same entropy-regularized PPO backbone so that differences in performance can be attributed more directly to the intrinsic exploration mechanism.
-          </p>
-
-          <p>
-            All methods are trained using the same PPO training interface and evaluated under consistent environment settings, training timesteps, and metrics. This allows us to compare learning performance and exploration behavior across methods in a fair and reproducible way.
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Methods -->
-
-<!-- Experimental Setup -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Experimental Setup</h2>
-        <div class="content has-text-justified">
-
-          <p>
-            All experiments are conducted under sparse-reward settings or semi-sparse reward setting to evaluate how different exploration strategies affect learning performance. We compare PPO baseline, PPO+ICM, and PPO+RND across multiple benchmark environments, including discrete navigation tasks, classic control tasks, and robotic manipulation tasks.
-          </p>
-
-          <p>
-            For discrete and low-dimensional tasks, we adopt pure sparse rewards, where the agent receives external reward only after reaching the goal or completing the task. This setting directly tests whether the agent can discover successful trajectories with minimal feedback.
-          </p>
-
-          <p>
-            For high-dimensional continuous-control tasks such as Meta-World Reach-v3, a fully binary sparse reward often makes learning highly unstable because successful states are rarely encountered during early training. Therefore, we investigate multiple sparse or semi-sparse reward designs for Reach-v3, including milestone-based rewards and a weak dense shaping term of <code>0.005</code>. These settings allow us to examine how different forms of limited task guidance influence the learning behavior of PPO, ICM, and RND.
-          </p>
-
-          <p>
-            To ensure fair comparison, all methods are trained using the same PPO training pipeline, evaluation protocol, and environment configuration whenever possible. Training progress is monitored using success rate, average return, and exponentially weighted moving average (EWMA) success rate.
-          </p>
-
-          <p>
-            In addition to learning curves, we analyze state visitation patterns using heatmaps. These visualizations help reveal whether an exploration method improves state-space coverage and whether broader exploration leads to better task performance.
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Experimental Setup -->
-
-<!-- Results -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Results</h2>
-
-        <div class="content has-text-justified">
-
-          <h3 class="title is-4">FrozenLake</h3>
-
-          <p>
-            In the FrozenLake task, PPO with entropy regularization already achieves strong performance under the sparse-reward setting. However, the learning curves show that intrinsic motivation mainly affects the learning speed rather than the final performance.
-          </p>
-
-          <p>
-            ICM shows the fastest early improvement in EWMA success rate, suggesting that curiosity-driven rewards help the agent discover successful trajectories earlier in training. PPO also reaches a comparable performance level, but its improvement appears later than ICM. In contrast, RND shows the slowest improvement and performs slightly weaker during the early and middle stages of training.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/frozenlake_eval.jpg" alt="FrozenLake learning curves">
-            <figcaption class="has-text-centered">
-              Learning curves on FrozenLake evaluated every 5,000 steps.
-            </figcaption>
-          </figure>
-
-          <p>
-            The visitation heatmaps show that all methods eventually concentrate their visits along the upper row and right column, which correspond to the dominant successful path toward the goal. PPO and RND exhibit relatively similar final visitation patterns, indicating that both methods mainly exploit the successful route after learning.
-          </p>
-          
-          <p>
-            In contrast, ICM shows noticeably higher visitation frequencies around the starting region and nearby states, especially along the upper-left part of the map. This suggests that ICM does not necessarily increase global exploration coverage, but it improves local exploration around early states, which may help the agent discover successful trajectories earlier in training.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/frozenlake_heatmap.jpg" alt="FrozenLake visitation heatmap">
-            <figcaption class="has-text-centered">
-              State visitation heatmaps after training on FrozenLake.
-            </figcaption>
-          </figure>
-
-          <p>
-            Overall, the FrozenLake results suggest that intrinsic motivation does not significantly improve the final success rate when PPO with entropy regularization already performs well. Instead, ICM mainly improves early learning efficiency, while RND behaves more similarly to PPO and learns more slowly. This highlights the difference between exploration behavior, learning speed, and final task performance in sparse-reward environments.
-          </p>
-
-          <h3 class="title is-4">Meta-World Reach-v3: Pure Sparse Reward</h3>
-
-          <p>
-            We first evaluate Meta-World Reach-v3 under a pure sparse-reward setting. In this setting, the original dense reward is removed, and the agent receives a reward only when the target is successfully reached. This makes the task significantly more difficult than original Meta-World setting.
-          </p>
-
-          <p>
-            The learning curves show that PPO occasionally discovers successful trajectories, especially in the later stage of training, leading to several spikes in success rate and average return. However, the performance remains unstable. RND shows a short early improvement but fails to maintain consistent success, while ICM shows almost no successful learning under this setting.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/rb5.jpg" alt="Meta-World Reach-v3 pure sparse reward learning curves">
-            <figcaption class="has-text-centered">
-              Learning curves on Meta-World Reach-v3 under the pure sparse-reward setting.
-            </figcaption>
-          </figure>
-
-          <p>
-            The exploration heatmaps further suggest that PPO visits regions closer to the target more frequently, which explains its occasional success. In contrast, ICM and RND tend to concentrate visits around specific workspace regions or boundaries rather than consistently exploring the target area. This indicates that intrinsic rewards do not necessarily produce task-relevant exploration in high-dimensional continuous-control environments.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/reach_basic.jpg" alt="Meta-World Reach-v3 pure sparse reward exploration heatmaps">
-            <figcaption class="has-text-centered">
-              Exploration heatmaps of Meta-World Reach-v3 under the pure sparse-reward setting.
-            </figcaption>
-          </figure>
-
-          <p>
-            Overall, the Reach-v3 results show that pure sparse rewards make robotic manipulation substantially harder than discrete navigation tasks. Unlike FrozenLake, where all methods eventually learn reasonable policies, Reach-v3 requires more informative exploration guidance. This motivates the use of controlled sparse rewards or weak shaping terms in later experiments to stabilize training while still preserving the sparse-reward challenge.
-          </p>
-
-          <h3 class="title is-4">Meta-World Reach-v3: Basic Wrapper with Weak Dense Shaping</h3>
-
-          <p>
-            In this Reach-v3 experiment, we introduce a weak dense shaping term with <code>dense_coef = 0.005</code> to the pure sparse reward wrapper. Compared with the pure sparse reward setting, this way provides a smoother and more direct learning signal, while still remaining much weaker than a fully dense reward formulation.
-          </p>
-
-          <p>
-            The learning curves show that the PPO baseline performs best under this setting. PPO reaches high success rates more quickly and achieves the most stable improvement in both success rate and EWMA success rate. ICM also learns the task to some extent, but its improvement is slower and less stable than PPO. In contrast, RND performs the worst: although it occasionally reaches moderate success rates, it fails to maintain consistent progress and does not converge as reliably as the other two methods.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/rb0.005_5.jpg" alt="Meta-World Reach-v3 basic wrapper with weak dense shaping learning curves">
-            <figcaption class="has-text-centered">
-              Learning curves on Meta-World Reach-v3 using a basic reward wrapper with weak dense shaping.
-            </figcaption>
-          </figure>
-
-          <p>
-            The exploration heatmaps further support this observation. PPO shows a concentrated visitation pattern around the target region across the x-y, x-z, and y-z projections, indicating that the weak dense shaping term is already sufficient to guide the policy toward effective reaching behavior. ICM also explores around the target region, but its visitation pattern is more diffuse, suggesting that curiosity-driven exploration does not translate into equally efficient exploitation. RND appears visually concentrated in some projections, but this does not lead to strong learning performance.
-          </p>
-
-          <p>
-            In particular, PPO exhibits the clearest alignment between target-centered exploration and final task success. ICM reaches similar task-relevant regions, but its visitation remains broader and less stable. RND, despite sometimes showing seemingly focused exploration heatmaps, fails to convert this exploration pattern into sustained reaching success. This suggests that a visually concentrated exploration map does not necessarily imply faster or better policy learning.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/rbasic_0.005.jpg" alt="Meta-World Reach-v3 basic wrapper with weak dense shaping exploration heatmaps">
-            <figcaption class="has-text-centered">
-              Exploration heatmaps of Meta-World Reach-v3 using a basic reward wrapper with weak dense shaping.
-            </figcaption>
-          </figure>
-
-          <p>
-            Overall, these results indicate that, in the Reach-v3 task, a simple and smooth reward structure with a very small amount of dense guidance is already sufficient for PPO to learn effectively. Under this semi-sparse setting, the additional intrinsic rewards from ICM and RND do not provide clear advantages, and may even interfere with efficient exploitation. Therefore, for relatively simple reaching tasks, reward design appears to have a stronger influence on performance than the choice of intrinsic exploration module.
-          </p>
-
-          <h3 class="title is-4">Meta-World Reach-v3: Milestone Reward without Dense Shaping</h3>
-
-          <p>
-            In the next Reach-v3 experiment, we introduce a milestone-based reward wrapper that provides additional rewards when the end-effector moves closer to the target. However, the dense shaping reward is still set to zero. This setting provides slightly more guidance than the pure sparse-reward version, but the agent still does not receive continuous distance-based feedback.
-          </p>
-
-          <p>
-            The learning curves show that all methods remain unstable under this setting. PPO and RND achieve short periods of success in the early stage of training, but their success rates quickly drop and do not recover consistently. ICM shows a delayed improvement around the middle stage of training, but the improvement is temporary and does not lead to stable task completion.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/rdc5.jpg" alt="Meta-World Reach-v3 milestone reward without dense shaping learning curves">
-            <figcaption class="has-text-centered">
-              Learning curves on Meta-World Reach-v3 using milestone-based rewards without dense shaping.
-            </figcaption>
-          </figure>
-
-          <p>
-            The exploration heatmaps indicate that the agents still concentrate their visits around limited regions of the workspace. Compared with the pure sparse-reward setting, the milestone reward does not clearly shift the visitation distribution toward the target. Instead, PPO, ICM, and RND all show strong concentration near specific boundaries or corners, suggesting that milestone rewards alone are not sufficient to guide stable target-oriented exploration.
-          </p>
-
-          <p>
-            ICM shows particularly strong concentration near the lower-left region, which suggests that curiosity-driven exploration may become trapped in locally novel but task-irrelevant regions. Similarly, PPO and RND do not show a clearly target-centered visitation pattern. This explains why the learning curves only show short success spikes rather than stable improvement.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/reach_dc0.jpg" alt="Meta-World Reach-v3 milestone reward without dense shaping exploration heatmaps">
-            <figcaption class="has-text-centered">
-              Exploration heatmaps of Meta-World Reach-v3 using milestone-based rewards without dense shaping.
-            </figcaption>
-          </figure>
-
-          <p>
-            Compared with the pure sparse-reward setting, milestone rewards do not provide improvement and are still not sufficient to produce stable learning. The results suggest that reaching tasks in high-dimensional continuous-control environments require more informative guidance than sparse success signals or discrete milestone rewards alone. Without dense shaping, the agent may discover the target occasionally, but it struggles to maintain a stable policy.
-          </p>
-
-          <h3 class="title is-4">Meta-World Reach-v3: Milestone Reward with Dense Shaping (0.005)</h3>
-
-          <p>
-            In the final Reach-v3 experiment, a small dense shaping reward of 0.005 is added on top of the milestone-based reward. Although the shaping reward is extremely small compared with the success reward, it significantly changes the learning dynamics of all methods.
-          </p>
-
-          <p>
-            Compared with the pure sparse-reward and milestone-only settings, all methods achieve substantially higher success rates. PPO reaches an EWMA success rate above 0.8 earlier than the intrinsic-motivation methods, indicating that the additional dense reward provides sufficient guidance for efficient policy optimization. ICM also achieves strong performance but converges more slowly, while RND requires the longest training time and does not consistently reach the same success level before training terminates.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/r5.jpg" alt="Meta-World Reach-v3 dense shaping learning curves">
-            <figcaption class="has-text-centered">
-              Learning curves on Meta-World Reach-v3 with milestone rewards and a dense shaping reward of 0.005.
-            </figcaption>
-          </figure>
-
-          <p>
-            The exploration heatmaps reveal distinct behaviors among the three methods. PPO shows the most concentrated visitation pattern around the target region, suggesting that it quickly exploits successful trajectories once the weak dense reward provides useful guidance.
-          </p>
-
-          <p>
-            RND exhibits the higher visitation frequency around the target neighborhood, but this does not translate into the best success rate. This suggests that reaching or passing through the target region is not sufficient for successful reaching; the agent must also learn a stable control policy that consistently satisfies the success condition.
-          </p>
-
-          <p>
-            ICM appears to visit the target neighborhood less frequently than RND, but it achieves better learning performance. This indicates that ICM may convert exploration into more stable reaching behavior, while RND may continue novelty-seeking around the target and delay exploitation. Overall, these results highlight that target-region coverage and final task success are related but not equivalent.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/reach.jpg" alt="Meta-World Reach-v3 dense shaping exploration heatmaps">
-            <figcaption class="has-text-centered">
-              Exploration heatmaps of Meta-World Reach-v3 with milestone rewards and a dense shaping reward of 0.005.
-            </figcaption>
-          </figure>
-
-          <h3 class="title is-4">Meta-World Reach-v3: A result comparison of both basic and milestone reward wrappers with dense shaping</h3>
-          <p>
-            Comparing all reward settings reveals that a small dense shaping signal plays a critical role in high-dimensional sparse-reward robotic manipulation tasks. Under both the milestone-based and basic-wrapper settings, adding a weak dense reward substantially improves learnability compared with the fully sparse case. However, the results further show that reward structure and exploration mechanism interact strongly. With the basic wrapper and <code>dense_coef = 0.005</code>, the PPO baseline learns the Reach-v3 task most effectively, indicating that a simple and smooth directional reward is already sufficient for stable policy learning. In contrast, when intrinsic exploration modules are introduced, both ICM and RND perform better under the milestone-based wrapper than under the basic wrapper, suggesting that these methods benefit more from structured intermediate progress signals. Overall, the findings indicate that performance is determined not only by whether dense shaping is present, but also by how the reward structure matches the underlying learning mechanism.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/c1.jpg" alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for PPO">
-            <figcaption class="has-text-centered">
-              Success-rate comparison between milestone and basic reward wrappers for PPO on Meta-World Reach-v3, both using weak dense shaping.
-            </figcaption>
-          </figure>
-
-          <p>
-            For the PPO baseline, the basic wrapper produces faster and more stable learning than the milestone wrapper. This suggests that, without intrinsic exploration, PPO benefits most from a simple and smooth reward landscape that directly provides directional guidance.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/c2.jpg" alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for ICM">
-            <figcaption class="has-text-centered">
-              Success-rate comparison between milestone and basic reward wrappers for PPO + ICM on Meta-World Reach-v3, both using weak dense shaping.
-            </figcaption>
-          </figure>
-
-          <p>
-            After adding ICM, the trend reverses. The milestone wrapper substantially outperforms the basic wrapper, indicating that curiosity-driven exploration benefits more from structured intermediate progress signals than from a purely smooth reward design.
-          </p>
-
-          <figure class="image">
-            <img src="static/images/c3.jpg" alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for RND">
-            <figcaption class="has-text-centered">
-              Success-rate comparison between milestone and basic reward wrappers for PPO + RND on Meta-World Reach-v3, both using weak dense shaping.
-            </figcaption>
-          </figure>
-
-          <p>
-            A similar pattern is observed for RND. The milestone wrapper again performs better than the basic wrapper, suggesting that novelty-driven exploration also requires more explicit task structure in order to convert exploration into stable task success.
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Results -->
-
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Appendix A. Implementation Details</h2>
-        <div class="content has-text-justified">
-            <h3 class="title is-4">A.1 PPO Training Pipeline</h3>
-
-            <p>
-              The PPO training procedure is implemented through a lightweight utility function named <code>run_ppo</code>. This function is responsible for constructing the PPO model, launching training, and saving the final checkpoint for later evaluation. The output path is first converted into a <code>Path</code> object, and the corresponding directory is created if necessary. A Stable-Baselines3 PPO model is then initialized using the target environment and the hyperparameters specified in the configuration file.
-            </p>
-
-            <p>
-              After initialization, the model is trained through the <code>learn</code> function for a predefined number of timesteps. Optional callbacks can be attached to the training loop, allowing modules such as EWMA-based evaluation, ICM updates, or RND updates to be executed periodically during training. Once training is complete, the trained model is saved to the designated checkpoint path. This design provides a unified training interface across different benchmark environments and exploration settings.
-            </p>
-
-            <h3 class="title is-4">A.2 Training Script and Configuration</h3>
-
-            <p>
-              The training pipeline is implemented in a central script that loads experiment configurations, builds the environment, applies reward wrappers, initializes exploration modules, and launches PPO training. All experiment settings are defined in YAML configuration files, including environment parameters, wrapper options, agent hyperparameters, training length, output paths, and evaluation settings. This configuration-based design improves reproducibility and allows experiments to be modified without changing the main training logic.
-            </p>
-
-            <p>
-              To reduce run-to-run variation, the training script explicitly sets the random seed for Python, NumPy, and PyTorch. The same seed is also applied when resetting both the training and evaluation environments. After constructing the base environment, the script optionally applies sparse-reward wrappers according to the configuration. Exploration modules are then initialized if enabled.
-            </p>
-
-            <p>
-              Two intrinsic exploration options are supported in the current implementation: Intrinsic Curiosity Module (ICM) and Random Network Distillation (RND). For both methods, the training script initializes the exploration module, its optimizer, and the corresponding callback for periodic updates. For ICM, the script automatically detects whether the action space is discrete or continuous, and sets the action type and action dimension accordingly. This allows the same training pipeline to support both discrete environments such as FrozenLake and continuous-control environments such as Meta-World.
-            </p>
-
-            <p>
-              All active callbacks are collected into a callback list, which may include the ICM update callback, the RND update callback, and the EWMA success evaluation callback. If multiple callbacks are enabled, they are merged into a <code>CallbackList</code> so that they can be executed together during PPO training. This modular design keeps exploration-module optimization separate from policy learning while maintaining a unified overall pipeline.
-            </p>
-
-            <h3 class="title is-4">A.3 Exploration Modules</h3>
-
-            <p>
-              To improve learning under sparse rewards, we incorporate intrinsic exploration mechanisms on top of PPO. Although both methods aim to encourage broader exploration, they provide additional learning signals in different ways.
-            </p>
-
-            <h4 class="title is-5">A.3.1 Intrinsic Curiosity Module (ICM)</h4>
-
-            <p>
-              ICM encourages exploration through transition prediction error. It first maps observations into a latent feature space and then trains a forward model to predict the next-state feature from the current-state feature and the action. The intrinsic reward is computed from the forward prediction error. Transitions that are harder to predict produce larger intrinsic rewards, encouraging the agent to explore less predictable dynamics. In addition, an inverse dynamics model is trained jointly to predict the action from consecutive state features, which helps improve the learned representation.
-            </p>
-
-            <h4 class="title is-5">A.3.2 Random Network Distillation (RND)</h4>
-
-            <p>
-              RND measures novelty through feature prediction mismatch. It uses a fixed randomly initialized target network and a trainable predictor network. For a given observation, the intrinsic reward is defined as the prediction error between the two networks. Observations that are less familiar to the predictor produce larger prediction errors and therefore larger intrinsic rewards. As training proceeds and the predictor learns the visited observations, the intrinsic reward gradually decreases. This mechanism naturally encourages the agent to move toward less familiar regions of the state space.
-            </p>
-
-            <h4 class="title is-5">A.3.3 Comparison of Exploration Signals</h4>
-
-            <p>
-              ICM and RND emphasize novelty in different ways. ICM rewards transitions that are difficult to predict in a learned dynamics model, while RND rewards observations that remain poorly predicted by the predictor network relative to a fixed random target network. Therefore, ICM is more sensitive to transition-level unpredictability, whereas RND mainly captures state novelty through feature prediction mismatch.
-            </p>
-
-            <h3 class="title is-4">A.4 ICM Module Implementation</h3>
-
-            <p>
-              The Intrinsic Curiosity Module is implemented to support both discrete and continuous action spaces within a unified framework. The module first encodes each observation into a latent feature representation through a two-layer multilayer perceptron. This feature representation is then used by both the inverse and forward dynamics models.
-            </p>
-
-            <p>
-              The inverse model takes the concatenation of the current feature and the next-state feature as input and predicts the action that caused the transition. For discrete action spaces, this is formulated as a classification problem using cross-entropy loss. For continuous action spaces, it is formulated as a regression problem using mean squared error.
-            </p>
-
-            <p>
-              The forward model predicts the next-state feature from the current feature and the action. For discrete actions, the action is converted into a one-hot vector before concatenation. For continuous actions, the raw action vector is used directly. The forward model is trained with mean squared error between the predicted next feature and the encoded next feature.
-            </p>
-
-            <p>
-              The intrinsic reward is computed from the forward prediction error. In practice, the raw ICM intrinsic reward is further processed before being added to the extrinsic reward. For continuous-action environments, it is normalized by a running standard deviation to stabilize scale during training. Optional clipping can also be applied before scaling and reward combination. The total ICM loss is defined as a weighted combination of inverse loss and forward loss, controlled by the coefficient <code>beta</code>.
-            </p>
-
-            <h3 class="title is-4">A.5 ICM Update Callback</h3>
-
-            <p>
-              The ICM update callback is used to optimize the Intrinsic Curiosity Module alongside PPO during environment interaction. Instead of updating the module at every step, the callback performs periodic updates according to a predefined update frequency. The exploration wrapper stores transitions of the form <code>(s, a, s')</code> in an internal buffer, and these transitions are retrieved whenever the update condition is met.
-            </p>
-
-            <p>
-              When triggered, the callback converts the stored transitions into batched tensors for current observations, actions, and next observations. The action tensor type is adjusted automatically according to whether the action space is discrete or continuous. The callback then calls the ICM module to compute the inverse loss, forward loss, and total ICM loss. Afterward, a standard gradient update is performed by clearing gradients, backpropagating the loss, and updating the ICM parameters through the optimizer. This optimization process is kept separate from the PPO optimizer, allowing curiosity-model learning and policy learning to proceed in parallel.
-            </p>
-
-            <h3 class="title is-4">A.6 RND Module Implementation</h3>
-
-            <p>
-              The Random Network Distillation module is implemented to generate intrinsic reward based on feature-space prediction error. It consists of two neural networks: a fixed target network and a trainable predictor network. Both networks take the observation as input and output a feature vector of the same dimension.
-            </p>
-
-            <p>
-              The target network is randomly initialized and then frozen throughout training. The predictor network is trained to approximate the target network output. For a given observation, the intrinsic reward is defined as the squared prediction error between the predictor output and the target output. States that are less familiar to the predictor receive higher intrinsic reward, encouraging exploration toward novel observations.
-            </p>
-
-            <p>
-              In the implementation, the raw RND intrinsic reward is normalized by a running standard deviation before being scaled and added to the extrinsic reward. This normalization helps stabilize the novelty signal during training. The RND predictor is optimized using mean squared error loss between the predictor output and the fixed target output.
-            </p>
-
-            <h3 class="title is-4">A.7 RND Update Callback</h3>
-
-            <p>
-              The RND update callback is responsible for training the predictor network during PPO interaction. During rollout collection, the environment wrapper stores observations encountered by the agent. These observations are later retrieved through <code>pop_observations()</code> whenever the callback update condition is satisfied.
-            </p>
-
-            <p>
-              The callback performs updates periodically rather than at every step. When triggered, the stored observations are converted into a tensor batch on the same device as the RND module. The callback then computes the RND loss and updates the predictor network through a standard gradient step. Since the target network remains fixed, only the predictor network is optimized. As the predictor becomes more accurate on frequently visited observations, the intrinsic reward for those states decreases over time.
-            </p>
-
-            <h3 class="title is-4">A.8 Evaluation Pipeline</h3>
-
-            <p>
-              The evaluation module is implemented as a benchmark-oriented utility for testing trained agents under a consistent protocol. The function <code>run_one_episode()</code> executes one full episode in the target environment. During interaction, it records the received rewards, whether the task has been successfully completed, the visited coverage identifiers, and the episode length.
-            </p>
-
-            <p>
-              An episode is considered successful if any visited state during the episode reports <code>success = True</code> in the <code>info</code> dictionary. To evaluate exploration behavior, the evaluator also tracks all unique <code>coverage_id</code> values encountered during the episode and uses their count as the episode-level coverage metric.
-            </p>
-
-            <p>
-              The function <code>evaluate_agent</code> repeatedly runs single-episode evaluation for a predefined number of episodes. It aggregates average return, success rate, average coverage count, and the number of evaluated episodes. This modular evaluation design allows all methods to be compared under the same benchmark criteria.
-            </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
- 
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-<!-- End image carousel -->
-
-
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- TODO: Replace with your YouTube video ID -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </section>
+    <!-- End youtube video -->
+
+
+    <!-- Video carousel -->
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-3">Another Carousel</h2>
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item item-video1">
+              <!-- TODO: Add poster image for better preview -->
+              <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
+                <!-- Your video file here -->
+                <source src="static/videos/carousel1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="item item-video2">
+              <!-- TODO: Add poster image for better preview -->
+              <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
+                <!-- Your video file here -->
+                <source src="static/videos/carousel2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="item item-video3">
+              <!-- TODO: Add poster image for better preview -->
+              <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
+                <!-- Your video file here -->
+                <source src="static/videos/carousel3.mp4" type="video/mp4">
+              </video>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-<!-- End youtube video -->
-
-
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End video carousel -->
+    </section>
+    <!-- End video carousel -->
 
 
 
 
 
 
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
+    <!-- Paper poster -->
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title">Poster</h2>
 
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
+          <!-- TODO: Replace with your poster PDF -->
+          <iframe src="static/pdfs/sample.pdf" width="100%" height="550">
           </iframe>
-        
+
+        </div>
       </div>
-    </div>
-  </section>
-<!--End paper poster -->
+    </section>
+    <!--End paper poster -->
 
 
 
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <div class="bibtex-header">
-        <h2 class="title">BibTeX</h2>
-        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-          <i class="fas fa-copy"></i>
-          <span class="copy-text">Copy</span>
-        </button>
-      </div>
-      <pre id="bibtex-code"><code>@article{YourPaperKey2024,
+    <!--BibTex citation -->
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <div class="bibtex-header">
+          <h2 class="title">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+            <i class="fas fa-copy"></i>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+        <pre id="bibtex-code"><code>@article{YourPaperKey2024,
   title={Your Paper Title Here},
   author={First Author and Second Author and Third Author},
   journal={Conference/Journal Name},
   year={2024},
   url={https://your-domain.com/your-project-page}
 }</code></pre>
-    </div>
-</section>
-<!--End BibTex citation -->
+      </div>
+    </section>
+    <!--End BibTex citation -->
 
 
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
 
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
+              <p>
+                This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                  target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                  href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                You are free to borrow the source code of this website, we just ask that you link back to this page in
+                the footer. <br> This website is licensed under a <a rel="license"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                  Commons Attribution-ShareAlike 4.0 International License</a>.
+              </p>
 
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</footer>
+    </footer>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+    <!-- Statcounter tracking code -->
+
+    <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
     <!-- End of Statcounter Code -->
 
-  </body>
-  </html>
+    </body>
+
+</html>

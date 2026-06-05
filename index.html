@@ -724,7 +724,7 @@
                 <img src="static/images/gridworld/gridworld_20x20_success_curve.png"
                   alt="20x20 Gridworld success rate curves">
                 <figcaption class="has-text-centered">
-                  Learning curves (EWMA success rate) on the 20×20 Gridworld with 25 obstacles.
+                  Learning curves on the 20×20 Gridworld with 25 obstacles.
                 </figcaption>
               </figure>
 
@@ -961,6 +961,153 @@
                 too much time exploring empty spaces instead of just going to the goal, and RND can easily fall into the
                 trap of bumping into boundaries for easy rewards. This shows that while intrinsic rewards increase
                 exploration coverage, the agent still needs to balance its curiosity with actually solving the task.
+              </p>
+
+              <h3 class="title is-4">Meta-World: Button-Press-v3</h3>
+              <p>
+                In the Meta-World Button-Press-v3 environment, introducing intrinsic motivation (PPO+ICM
+                and PPO+RND) leads to drastically different behavioral patterns compared to the standard PPO baseline.
+              </p>
+
+              <p>
+                Looking at the evaluation learning curves, standard PPO struggles significantly in the early stages. It
+                only begins to successfully press the button around 2.6M steps and takes until approximately 3.5M steps
+                to reach an EWMA success rate of 0.8. In stark contrast, adding intrinsic curiosity accelerates learning
+                immensely: PPO+ICM reaches the 0.8 threshold in just 500k steps, and PPO+RND reaches it at 1.8M steps.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/metaworld_button_success_curve.png" alt="Button Press success rate curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on the Meta-World button-press-v3 environment.
+                </figcaption>
+              </figure>
+
+              <h4 class="title is-5">Visualizing 3D Exploration via 2D Projections</h4>
+              <p>
+                To understand why their learning speeds differ so much, we visualize their exploration footprints. Since
+                the robotic arm moves in a 3D space, we project the visitation data onto three 2D planes: XY (top-down
+                view), XZ (front view), and YZ (side view).
+              </p>
+              <p>
+                For each 2D projection, we aggregate the hidden third axis using two different methods:
+                <br>
+                <strong>1. Min Projection:</strong> Represents the "earliest" or "least" interaction. For example, the
+                <em>Min First Visit Step</em> shows the earliest time the agent ever crossed that specific line of
+                sight.
+                <br>
+                <strong>2. Max Projection:</strong> Represents the "latest" or "most" interaction. For example, the
+                <em>Max Visitation Count</em> highlights the specific point along that line of sight that was visited
+                the most frequently.
+              </p>
+
+              <h4 class="title is-5">Visitation Count Analysis</h4>
+              <p>
+                The Visitation Count heatmaps reveal clear behavioral habits. Standard PPO tends to fixate and
+                concentrate its movements around a single spatial point. PPO+RND, echoing its problematic behavior in
+                the Gridworld, gets stuck hovering in a specific corner. PPO+ICM, however, is much more dispersed,
+                showing continuous movement and traversal across multiple locations within the workspace.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/none_button_visit_count_min_2d_proj.png"
+                  alt="PPO Visit Count Min">
+                <figcaption class="has-text-centered">PPO - Min Visitation Count</figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/icm_button_visit_count_min_2d_proj.png"
+                  alt="ICM Visit Count Min">
+                <figcaption class="has-text-centered">PPO+ICM - Min Visitation Count</figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/rnd_button_visit_count_min_2d_proj.png"
+                  alt="RND Visit Count Min">
+                <figcaption class="has-text-centered">PPO+RND - Min Visitation Count</figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/none_button_visit_count_max_2d_proj.png"
+                  alt="PPO Visit Count Max">
+                <figcaption class="has-text-centered">PPO - Max Visitation Count</figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/icm_button_visit_count_max_2d_proj.png"
+                  alt="ICM Visit Count Max">
+                <figcaption class="has-text-centered">PPO+ICM - Max Visitation Count</figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/rnd_button_visit_count_max_2d_proj.png"
+                  alt="RND Visit Count Max">
+                <figcaption class="has-text-centered">PPO+RND - Max Visitation Count</figcaption>
+              </figure>
+
+              <h4 class="title is-5">First Visit Step Analysis</h4>
+              <p>
+                The First Visit Step heatmaps provide further context. In the "Min" maps, all three methods show blue
+                regions near the button (marked by a star), indicating that they all managed to accidentally wander near
+                the goal early in training.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/none_button_first_visit_min_2d_proj.png"
+                  alt="PPO First Visit Min">
+                <figcaption class="has-text-centered">PPO - Min First Visit Step</figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/icm_button_first_visit_min_2d_proj.png"
+                  alt="ICM First Visit Min">
+                <figcaption class="has-text-centered">PPO+ICM - Min First Visit Step</figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/rnd_button_first_visit_min_2d_proj.png"
+                  alt="RND First Visit Min">
+                <figcaption class="has-text-centered">PPO+RND - Min First Visit Step</figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/none_button_first_visit_max_2d_proj.png"
+                  alt="PPO First Visit Max">
+                <figcaption class="has-text-centered">PPO - Max First Visit Step</figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/icm_button_first_visit_max_2d_proj.png"
+                  alt="ICM First Visit Max">
+                <figcaption class="has-text-centered">PPO+ICM - Max First Visit Step</figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/metaworld-button/rnd_button_first_visit_max_2d_proj.png"
+                  alt="RND First Visit Max">
+                <figcaption class="has-text-centered">PPO+RND - Max First Visit Step</figcaption>
+              </figure>
+
+              <p>
+                However, standard PPO and PPO+RND suffer from an "exploration gap." Their maps consist mostly of early
+                (blue) and very late (orange/yellow) colors, missing the smooth transitional colors in the middle. This
+                correlates with our Visitation Count findings: because they get stuck in their preferred single point or
+                corner, they essentially stop exploring new areas for a long period. On the other hand, PPO+ICM
+                continuously seeks out new experiences. Its heatmap shows a smooth, diverse color gradient from blue to
+                yellow, proving it never stopped exploring the workspace.
+              </p>
+
+              <h4 class="title is-5">Summary of Button-Press-v3 Findings</h4>
+              <p>
+                Why does PPO+ICM dominate in this specific task? Unlike simple reaching or navigation tasks,
+                Button-Press-v3 involves physical object interaction. When the robotic arm accidentally
+                presses the button, the environment state changes dynamically (the button goes down). This sudden state
+                change creates a massive prediction error for ICM's forward model, generating a huge intrinsic reward.
+                This "surprise" naturally motivates the agent to keep playing with the button, quickly solidifying the
+                successful policy. PPO+RND, however, still suffers from its boundary trap vulnerability, getting stuck
+                in corners, while standard PPO simply lacks the active drive to escape its initial movement patterns.
+                This highlights that ICM is particularly powerful and efficient in environments featuring rich, dynamic
+                object interactions.
               </p>
             </div>
           </div>

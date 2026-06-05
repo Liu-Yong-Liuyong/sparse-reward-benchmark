@@ -730,7 +730,7 @@
 
               <p>
                 When looking at the visitation heatmaps, standard PPO leaves 22 cells in the top-right corner completely
-                unvisited (marked in black). On the other hand, ICM and RND explore more broadly, leaving only 9
+                unvisited (marked in black). On the other hand, PPO+ICM and PPO+RND explore more broadly, leaving only 9
                 unvisited cells.
               </p>
 
@@ -844,19 +844,22 @@
               <div class="columns is-centered">
                 <div class="column is-one-third">
                   <figure class="image">
-                    <img src="static/images/gridworld/none_50x50_gridworld_firstvisit.png" alt="PPO First Visit 50x50">
+                    <img src="static/images/gridworld/none_50x50_gridworld_firstvisit.png"
+                      alt="PPO First Visit Step 50x50">
                     <figcaption class="has-text-centered">PPO - First Visit Step</figcaption>
                   </figure>
                 </div>
                 <div class="column is-one-third">
                   <figure class="image">
-                    <img src="static/images/gridworld/icm_50x50_gridworld_firstvisit.png" alt="ICM First Visit 50x50">
+                    <img src="static/images/gridworld/icm_50x50_gridworld_firstvisit.png"
+                      alt="ICM First Visit Step 50x50">
                     <figcaption class="has-text-centered">PPO+ICM - First Visit Step</figcaption>
                   </figure>
                 </div>
                 <div class="column is-one-third">
                   <figure class="image">
-                    <img src="static/images/gridworld/rnd_50x50_gridworld_firstvisit.png" alt="RND First Visit 50x50">
+                    <img src="static/images/gridworld/rnd_50x50_gridworld_firstvisit.png"
+                      alt="RND First Visit Step 50x50">
                     <figcaption class="has-text-centered">PPO+RND - First Visit Step</figcaption>
                   </figure>
                 </div>
@@ -896,21 +899,21 @@
                 <div class="column is-one-third">
                   <figure class="image">
                     <img src="static/images/gridworld/none_50x50_gridworld_obstacles_visitcount.png"
-                      alt="PPO Visit Count Obstacles">
+                      alt="PPO Visitation Count Obstacles">
                     <figcaption class="has-text-centered">PPO - Visitation Count</figcaption>
                   </figure>
                 </div>
                 <div class="column is-one-third">
                   <figure class="image">
                     <img src="static/images/gridworld/icm_50x50_gridworld_obstacles_visitcount.png"
-                      alt="ICM Visit Count Obstacles">
+                      alt="ICM Visitation Count Obstacles">
                     <figcaption class="has-text-centered">PPO+ICM - Visitation Count</figcaption>
                   </figure>
                 </div>
                 <div class="column is-one-third">
                   <figure class="image">
                     <img src="static/images/gridworld/rnd_50x50_gridworld_obstacles_visitcount.png"
-                      alt="RND Visit Count Obstacles">
+                      alt="RND Visitation Count Obstacles">
                     <figcaption class="has-text-centered">PPO+RND - Visitation Count</figcaption>
                   </figure>
                 </div>
@@ -927,21 +930,21 @@
                 <div class="column is-one-third">
                   <figure class="image">
                     <img src="static/images/gridworld/none_50x50_gridworld_obstacles_firstvisit.png"
-                      alt="PPO First Visit Obstacles">
+                      alt="PPO First Visit Step Obstacles">
                     <figcaption class="has-text-centered">PPO - First Visit Step</figcaption>
                   </figure>
                 </div>
                 <div class="column is-one-third">
                   <figure class="image">
                     <img src="static/images/gridworld/icm_50x50_gridworld_obstacles_firstvisit.png"
-                      alt="ICM First Visit Obstacles">
+                      alt="ICM First Visit Step Obstacles">
                     <figcaption class="has-text-centered">PPO+ICM - First Visit Step</figcaption>
                   </figure>
                 </div>
                 <div class="column is-one-third">
                   <figure class="image">
                     <img src="static/images/gridworld/rnd_50x50_gridworld_obstacles_firstvisit.png"
-                      alt="RND First Visit Obstacles">
+                      alt="RND First Visit Step Obstacles">
                     <figcaption class="has-text-centered">PPO+RND - First Visit Step</figcaption>
                   </figure>
                 </div>
@@ -965,8 +968,8 @@
 
               <h3 class="title is-4">Meta-World: Button-Press-v3</h3>
               <p>
-                In the Meta-World Button-Press-v3 environment, introducing intrinsic motivation (PPO+ICM
-                and PPO+RND) leads to drastically different behavioral patterns compared to the standard PPO baseline.
+                In the Meta-World Button-Press-v3 environment, introducing intrinsic motivation (PPO+ICM and PPO+RND)
+                leads to drastically different behavioral patterns compared to the standard PPO baseline.
               </p>
 
               <p>
@@ -977,7 +980,8 @@
               </p>
 
               <figure class="image">
-                <img src="static/images/metaworld-button/metaworld_button_success_curve.png" alt="Button Press success rate curves">
+                <img src="static/images/metaworld-button/metaworld_button_success_curve.png"
+                  alt="Button Press success rate curves">
                 <figcaption class="has-text-centered">
                   Learning curves on the Meta-World button-press-v3 environment.
                 </figcaption>
@@ -989,13 +993,12 @@
                 the robotic arm moves in a 3D space, we project the visitation data onto three 2D planes: XY (top-down
                 view), XZ (front view), and YZ (side view).
               </p>
+
               <p>
-                For each 2D projection, we aggregate the hidden third axis using two different methods:
-                <br>
+                For each 2D projection, we aggregate the hidden third axis using two different methods: <br>
                 <strong>1. Min Projection:</strong> Represents the "earliest" or "least" interaction. For example, the
                 <em>Min First Visit Step</em> shows the earliest time the agent ever crossed that specific line of
-                sight.
-                <br>
+                sight. <br>
                 <strong>2. Max Projection:</strong> Represents the "latest" or "most" interaction. For example, the
                 <em>Max Visitation Count</em> highlights the specific point along that line of sight that was visited
                 the most frequently.
@@ -1011,80 +1014,70 @@
 
               <figure class="image">
                 <img src="static/images/metaworld-button/none_button_visit_count_min_2d_proj.png"
-                  alt="PPO Visit Count Min">
+                  alt="PPO Min Visitation Count">
                 <figcaption class="has-text-centered">PPO - Min Visitation Count</figcaption>
               </figure>
-
               <figure class="image">
                 <img src="static/images/metaworld-button/icm_button_visit_count_min_2d_proj.png"
-                  alt="ICM Visit Count Min">
+                  alt="ICM Min Visitation Count">
                 <figcaption class="has-text-centered">PPO+ICM - Min Visitation Count</figcaption>
               </figure>
-
               <figure class="image">
                 <img src="static/images/metaworld-button/rnd_button_visit_count_min_2d_proj.png"
-                  alt="RND Visit Count Min">
+                  alt="RND Min Visitation Count">
                 <figcaption class="has-text-centered">PPO+RND - Min Visitation Count</figcaption>
               </figure>
-
               <figure class="image">
                 <img src="static/images/metaworld-button/none_button_visit_count_max_2d_proj.png"
-                  alt="PPO Visit Count Max">
+                  alt="PPO Max Visitation Count">
                 <figcaption class="has-text-centered">PPO - Max Visitation Count</figcaption>
               </figure>
-
               <figure class="image">
                 <img src="static/images/metaworld-button/icm_button_visit_count_max_2d_proj.png"
-                  alt="ICM Visit Count Max">
+                  alt="ICM Max Visitation Count">
                 <figcaption class="has-text-centered">PPO+ICM - Max Visitation Count</figcaption>
               </figure>
-
               <figure class="image">
                 <img src="static/images/metaworld-button/rnd_button_visit_count_max_2d_proj.png"
-                  alt="RND Visit Count Max">
+                  alt="RND Max Visitation Count">
                 <figcaption class="has-text-centered">PPO+RND - Max Visitation Count</figcaption>
               </figure>
 
               <h4 class="title is-5">First Visit Step Analysis</h4>
               <p>
-                The First Visit Step heatmaps provide further context. In the "Min" maps, all three methods show blue
-                regions near the button (marked by a star), indicating that they all managed to accidentally wander near
-                the goal early in training.
+                The First Visit Step heatmaps provide further context. In the Min First Visit Step maps, all three
+                methods show blue regions near the button (marked by a star), indicating that they all managed to
+                accidentally wander near the goal early in training.
               </p>
 
               <figure class="image">
                 <img src="static/images/metaworld-button/none_button_first_visit_min_2d_proj.png"
-                  alt="PPO First Visit Min">
+                  alt="PPO Min First Visit Step">
                 <figcaption class="has-text-centered">PPO - Min First Visit Step</figcaption>
               </figure>
-
               <figure class="image">
                 <img src="static/images/metaworld-button/icm_button_first_visit_min_2d_proj.png"
-                  alt="ICM First Visit Min">
+                  alt="ICM Min First Visit Step">
                 <figcaption class="has-text-centered">PPO+ICM - Min First Visit Step</figcaption>
               </figure>
-
               <figure class="image">
                 <img src="static/images/metaworld-button/rnd_button_first_visit_min_2d_proj.png"
-                  alt="RND First Visit Min">
+                  alt="RND Min First Visit Step">
                 <figcaption class="has-text-centered">PPO+RND - Min First Visit Step</figcaption>
               </figure>
-
               <figure class="image">
                 <img src="static/images/metaworld-button/none_button_first_visit_max_2d_proj.png"
-                  alt="PPO First Visit Max">
+                  alt="PPO Max First Visit Step">
                 <figcaption class="has-text-centered">PPO - Max First Visit Step</figcaption>
               </figure>
-
               <figure class="image">
                 <img src="static/images/metaworld-button/icm_button_first_visit_max_2d_proj.png"
-                  alt="ICM First Visit Max">
+                  alt="ICM Max First Visit Step">
                 <figcaption class="has-text-centered">PPO+ICM - Max First Visit Step</figcaption>
               </figure>
-
               <figure class="image">
                 <img src="static/images/metaworld-button/rnd_button_first_visit_max_2d_proj.png"
-                  alt="RND First Visit Max">
+                  alt="RND Max First Visit Step">
                 <figcaption class="has-text-centered">PPO+RND - Max First Visit Step</figcaption>
               </figure>
 
@@ -1100,10 +1093,10 @@
               <h4 class="title is-5">Summary of Button-Press-v3 Findings</h4>
               <p>
                 Why does PPO+ICM dominate in this specific task? Unlike simple reaching or navigation tasks,
-                Button-Press-v3 involves physical object interaction. When the robotic arm accidentally
-                presses the button, the environment state changes dynamically (the button goes down). This sudden state
-                change creates a massive prediction error for ICM's forward model, generating a huge intrinsic reward.
-                This "surprise" naturally motivates the agent to keep playing with the button, quickly solidifying the
+                Button-Press-v3 involves physical object interaction. When the robotic arm accidentally presses the
+                button, the environment state changes dynamically (the button goes down). This sudden state change
+                creates a massive prediction error for ICM's forward model, generating a huge intrinsic reward. This
+                "surprise" naturally motivates the agent to keep playing with the button, quickly solidifying the
                 successful policy. PPO+RND, however, still suffers from its boundary trap vulnerability, getting stuck
                 in corners, while standard PPO simply lacks the active drive to escape its initial movement patterns.
                 This highlights that ICM is particularly powerful and efficient in environments featuring rich, dynamic

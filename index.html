@@ -1102,6 +1102,105 @@
                 This highlights that ICM is particularly powerful and efficient in environments featuring rich, dynamic
                 object interactions.
               </p>
+
+              <h3 class="title is-4">Sparse CartPole</h3>
+              <p>
+                Sparse CartPole modifies the classic CartPole-v1 task into a sparse-reward exploration problem. The
+                original dense per-step reward is removed; instead, the agent receives a reward of +10 only on the first
+                step at which the cart's x-position crosses a goal threshold of <code>x = 1.5</code> while the pole
+                remains upright. All other steps yield zero reward. A policy that simply balances the pole at
+                <code>x ≈ 0</code> — the optimal solution to the original dense task — never receives any reward in
+                our setting, so the agent must learn to simultaneously maintain balance and actively drive the cart
+                toward the goal region.
+              </p>
+
+              <p>
+                The learning curves show a clear separation between methods. PPO+ICM and PPO+RND both reach an EWMA
+                success rate of 0.8 at approximately 50k steps, while the standard PPO baseline requires roughly 175k
+                steps to reach the same threshold. This represents a 3-4× sample-efficiency improvement from adding
+                intrinsic motivation. The first successful evaluation episode occurs at around 20k–25k steps for the
+                intrinsic-reward methods, versus 140k–145k steps for the baseline.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/cartpole/cartpole_ewma_success_curve.png"
+                  alt="Sparse CartPole EWMA success rate curves">
+                <figcaption class="has-text-centered">
+                  EWMA success rate on Sparse CartPole. PPO+ICM and PPO+RND reach 0.8 around 50k steps; the PPO baseline
+                  requires roughly 175k steps.
+                </figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/cartpole/cartpole_success_curve.png"
+                  alt="Sparse CartPole evaluation success rate">
+                <figcaption class="has-text-centered">
+                  Evaluation success rate on Sparse CartPole, measured every 5,000 steps.
+                </figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/cartpole/cartpole_avg_return.png"
+                  alt="Sparse CartPole average return">
+                <figcaption class="has-text-centered">
+                  Average evaluation return on Sparse CartPole. Returns are binary (10 on success, 0 otherwise), so the
+                  curve mirrors the success rate.
+                </figcaption>
+              </figure>
+
+              <p>
+                The average-coverage curves show that PPO+ICM and PPO+RND quickly expand the agent's visitation across
+                the (cart-position, pole-angle) space, reaching roughly 25–28 unique bins per evaluation episode by 30k
+                steps. The PPO baseline remains around 4 bins for the first 140k steps before expanding to a similar
+                final coverage. This confirms that the intrinsic rewards drive earlier and broader exploration of the
+                state space, which translates into earlier discovery of the goal region.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/cartpole/cartpole_avg_coverage.png"
+                  alt="Sparse CartPole average coverage count">
+                <figcaption class="has-text-centered">
+                  Average state-coverage count on Sparse CartPole. Coverage expands much earlier for PPO+ICM and PPO+RND
+                  than for the baseline.
+                </figcaption>
+              </figure>
+
+              <p>
+                The state visitation heatmaps reveal where each agent spent most of its time at the end of training.
+                The x-axis shows cart position, the y-axis shows pole angle, and the dashed line marks the goal at
+                <code>x = 1.5</code>. All three methods concentrate visits near <code>x ≈ 0</code> with the pole close
+                to upright, which reflects the dominant strategy of balancing centrally and making short excursions
+                toward the goal to collect the sparse reward. Because each episode spends most of its steps balancing
+                and only a few steps near the goal, the goal region itself does not appear bright in the heatmaps.
+              </p>
+
+              <p>
+                PPO+ICM and PPO+RND show slightly broader horizontal smearing across cart positions and a wider spread
+                across pole angles than the PPO baseline, indicating that the intrinsic-reward methods explored more of
+                the state space during training even though their converged policies eventually settle into the same
+                balance-and-reach behavior.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/cartpole/cartpole_state_visitation.png"
+                  alt="Sparse CartPole state visitation heatmaps">
+                <figcaption class="has-text-centered">
+                  State visitation heatmaps for PPO+RND (left), PPO+ICM (middle), and PPO baseline (right). The dashed
+                  line marks the goal at <code>x = 1.5</code>.
+                </figcaption>
+              </figure>
+
+              <h4 class="title is-5">Summary of Sparse CartPole Findings</h4>
+              <p>
+                On Sparse CartPole, intrinsic motivation provides a substantial sample-efficiency advantage. PPO+ICM and
+                PPO+RND perform almost identically and reach the 0.8 EWMA success threshold roughly 3-4× faster than the
+                PPO baseline. All three methods eventually converge to a success rate of 1.0 with similar final
+                coverage, so the benefit of intrinsic rewards in this task lies entirely in faster discovery of the
+                goal rather than in better final performance. This pattern differs from FrozenLake, where intrinsic
+                motivation mainly affected early learning without changing final outcomes, and from the larger
+                Gridworld settings, where RND struggled with corner-trapping. In a continuous-state task with a clear
+                spatial exploration target, both ICM and RND provide reliable and comparable benefits.
+              </p>
             </div>
           </div>
         </div>

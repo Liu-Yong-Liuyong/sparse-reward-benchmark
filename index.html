@@ -1207,6 +1207,38 @@
       </div>
     </section>
     <!-- End Results -->
+    
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Conclusion</h2>
+
+            <div class="content has-text-justified">
+              <p>
+                In this project, we developed a unified sparse-reward benchmark for reinforcement learning exploration across both discrete and continuous-control tasks. Rather than focusing on a single environment or a single exploration strategy, our benchmark provides a reproducible framework for systematically comparing entropy-regularized PPO, PPO+ICM, and PPO+RND under consistent training and evaluation protocols.
+              </p>
+
+              <p>
+                Our results show that no single exploration method consistently performs best across all sparse-reward settings. Instead, performance is highly task-dependent and strongly influenced by reward structure. In discrete tasks, exploration mechanisms may improve learning speed without substantially changing final performance, while in continuous-control tasks the relative advantage of PPO, ICM, and RND can change significantly depending on how sparse rewards are formulated.
+              </p>
+
+              <p>
+                A particularly important finding of this benchmark is that reward design interacts strongly with the exploration mechanism. In Meta-World Reach, for example, a simple basic wrapper with weak dense shaping is already sufficient to make the PPO baseline highly effective, while milestone-based reward structures are more beneficial when combined with intrinsic exploration methods such as ICM and RND. This shows that sparse-reward exploration cannot be understood only as an algorithm-ranking problem; it must also be analyzed through the interaction between task type, reward structure, and learning dynamics.
+              </p>
+
+              <p>
+                In addition, our benchmark demonstrates that exploration quality cannot be judged solely by final success rate. State visitation heatmaps reveal that broader or more target-centered exploration does not always translate into faster or more stable task completion. Therefore, fair evaluation of sparse-reward exploration requires not only multiple task domains, but also consistent metrics that capture both learning outcome and exploration behavior.
+              </p>
+
+              <p>
+                Overall, this project highlights the value of benchmark-driven analysis for sparse-reward reinforcement learning. Rather than identifying a universally best exploration algorithm, our benchmark helps reveal when and under what reward structures different exploration mechanisms become effective. We hope this benchmark can serve as a reproducible foundation for future studies on exploration under sparse and semi-sparse reward settings.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
 

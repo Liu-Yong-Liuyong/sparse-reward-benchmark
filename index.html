@@ -64,8 +64,8 @@
     Project</title>
 
   <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="static/images/icon.ico">
+  <link rel="apple-touch-icon" href="static/images/icon.ico">
 
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -1197,15 +1197,7 @@
 
               <h4 class="title is-5">Summary of Button-Press-v3 Findings</h4>
               <p>
-                Why does PPO+ICM dominate in this specific task? Unlike simple reaching or navigation tasks,
-                Button-Press-v3 involves physical object interaction. When the robotic arm accidentally presses the
-                button, the environment state changes dynamically (the button goes down). This sudden state change
-                creates a massive prediction error for ICM's forward model, generating a huge intrinsic reward. This
-                "surprise" naturally motivates the agent to keep playing with the button, quickly solidifying the
-                successful policy. PPO+RND, however, still suffers from its boundary trap vulnerability, getting stuck
-                in corners, while standard PPO simply lacks the active drive to escape its initial movement patterns.
-                This highlights that ICM is particularly powerful and efficient in environments featuring rich, dynamic
-                object interactions.
+                Why does PPO+ICM achieve the fastest breakthrough in this specific task? Unlike simple reaching or navigation tasks, Button-Press-v3 involves physical object interaction. Although all methods initially struggle to find the target, taking a long time to achieve the first successful press, once the robotic arm accidentally presses the button, the environment state changes dynamically (the button goes down). This sudden state change creates a massive prediction error for ICM's forward model, generating a huge intrinsic reward. This "surprise" naturally motivates the agent to keep playing with the button, which explains the sudden vertical spike in its learning curve as it quickly solidifies the successful policy. PPO+RND, however, suffers from its boundary trap vulnerability, getting stuck in corners, while standard PPO simply lacks the active drive to escape its initial movement patterns, delaying their eventual success. This highlights that ICM is particularly powerful and efficient in environments featuring rich, dynamic object interactions.
               </p>
 
               

@@ -383,328 +383,6 @@
 
             <div class="content has-text-justified">
 
-              <h3 class="title is-4">FrozenLake</h3>
-
-              <p>
-                In the FrozenLake task, PPO with entropy regularization already achieves strong performance under the
-                sparse-reward setting. However, the learning curves show that intrinsic motivation mainly affects the
-                learning speed rather than the final performance.
-              </p>
-
-              <p>
-                ICM shows the fastest early improvement in EWMA success rate, suggesting that curiosity-driven rewards
-                help the agent discover successful trajectories earlier in training. PPO also reaches a comparable
-                performance level, but its improvement appears later than ICM. In contrast, RND shows the slowest
-                improvement and performs slightly weaker during the early and middle stages of training.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/frozenlake_eval.jpg" alt="FrozenLake learning curves">
-                <figcaption class="has-text-centered">
-                  Learning curves on FrozenLake evaluated every 5,000 steps.
-                </figcaption>
-              </figure>
-
-              <p>
-                The visitation heatmaps show that all methods eventually concentrate their visits along the upper row
-                and right column, which correspond to the dominant successful path toward the goal. PPO and RND exhibit
-                relatively similar final visitation patterns, indicating that both methods mainly exploit the successful
-                route after learning.
-              </p>
-
-              <p>
-                In contrast, ICM shows noticeably higher visitation frequencies around the starting region and nearby
-                states, especially along the upper-left part of the map. This suggests that ICM does not necessarily
-                increase global exploration coverage, but it improves local exploration around early states, which may
-                help the agent discover successful trajectories earlier in training.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/frozenlake_heatmap.jpg" alt="FrozenLake visitation heatmap">
-                <figcaption class="has-text-centered">
-                  State visitation heatmaps after training on FrozenLake.
-                </figcaption>
-              </figure>
-
-              <p>
-                Overall, the FrozenLake results suggest that intrinsic motivation does not significantly improve the
-                final success rate when PPO with entropy regularization already performs well. Instead, ICM mainly
-                improves early learning efficiency, while RND behaves more similarly to PPO and learns more slowly. This
-                highlights the difference between exploration behavior, learning speed, and final task performance in
-                sparse-reward environments.
-              </p>
-
-              <h3 class="title is-4">Meta-World Reach-v3: Pure Sparse Reward</h3>
-
-              <p>
-                We first evaluate Meta-World Reach-v3 under a pure sparse-reward setting. In this setting, the original
-                dense reward is removed, and the agent receives a reward only when the target is successfully reached.
-                This makes the task significantly more difficult than original Meta-World setting.
-              </p>
-
-              <p>
-                The learning curves show that PPO occasionally discovers successful trajectories, especially in the
-                later stage of training, leading to several spikes in success rate and average return. However, the
-                performance remains unstable. RND shows a short early improvement but fails to maintain consistent
-                success, while ICM shows almost no successful learning under this setting.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/rb5.jpg" alt="Meta-World Reach-v3 pure sparse reward learning curves">
-                <figcaption class="has-text-centered">
-                  Learning curves on Meta-World Reach-v3 under the pure sparse-reward setting.
-                </figcaption>
-              </figure>
-
-              <p>
-                The exploration heatmaps further suggest that PPO visits regions closer to the target more frequently,
-                which explains its occasional success. In contrast, ICM and RND tend to concentrate visits around
-                specific workspace regions or boundaries rather than consistently exploring the target area. This
-                indicates that intrinsic rewards do not necessarily produce task-relevant exploration in
-                high-dimensional continuous-control environments.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/reach_basic.jpg"
-                  alt="Meta-World Reach-v3 pure sparse reward exploration heatmaps">
-                <figcaption class="has-text-centered">
-                  Exploration heatmaps of Meta-World Reach-v3 under the pure sparse-reward setting.
-                </figcaption>
-              </figure>
-
-              <p>
-                Overall, the Reach-v3 results show that pure sparse rewards make robotic manipulation substantially
-                harder than discrete navigation tasks. Unlike FrozenLake, where all methods eventually learn reasonable
-                policies, Reach-v3 requires more informative exploration guidance. This motivates the use of controlled
-                sparse rewards or weak shaping terms in later experiments to stabilize training while still preserving
-                the sparse-reward challenge.
-              </p>
-
-              <h3 class="title is-4">Meta-World Reach-v3: Basic Wrapper with Weak Dense Shaping</h3>
-
-              <p>
-                In this Reach-v3 experiment, we introduce a weak dense shaping term with <code>dense_coef = 0.005</code>
-                to the pure sparse reward wrapper. Compared with the pure sparse reward setting, this way provides a
-                smoother and more direct learning signal, while still remaining much weaker than a fully dense reward
-                formulation.
-              </p>
-
-              <p>
-                The learning curves show that the PPO baseline performs best under this setting. PPO reaches high
-                success rates more quickly and achieves the most stable improvement in both success rate and EWMA
-                success rate. ICM also learns the task to some extent, but its improvement is slower and less stable
-                than PPO. In contrast, RND performs the worst: although it occasionally reaches moderate success rates,
-                it fails to maintain consistent progress and does not converge as reliably as the other two methods.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/rb0.005_5.jpg"
-                  alt="Meta-World Reach-v3 basic wrapper with weak dense shaping learning curves">
-                <figcaption class="has-text-centered">
-                  Learning curves on Meta-World Reach-v3 using a basic reward wrapper with weak dense shaping.
-                </figcaption>
-              </figure>
-
-              <p>
-                The exploration heatmaps further support this observation. PPO shows a concentrated visitation pattern
-                around the target region across the x-y, x-z, and y-z projections, indicating that the weak dense
-                shaping term is already sufficient to guide the policy toward effective reaching behavior. ICM also
-                explores around the target region, but its visitation pattern is more diffuse, suggesting that
-                curiosity-driven exploration does not translate into equally efficient exploitation. RND appears
-                visually concentrated in some projections, but this does not lead to strong learning performance.
-              </p>
-
-              <p>
-                In particular, PPO exhibits the clearest alignment between target-centered exploration and final task
-                success. ICM reaches similar task-relevant regions, but its visitation remains broader and less stable.
-                RND, despite sometimes showing seemingly focused exploration heatmaps, fails to convert this exploration
-                pattern into sustained reaching success. This suggests that a visually concentrated exploration map does
-                not necessarily imply faster or better policy learning.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/rbasic_0.005.jpg"
-                  alt="Meta-World Reach-v3 basic wrapper with weak dense shaping exploration heatmaps">
-                <figcaption class="has-text-centered">
-                  Exploration heatmaps of Meta-World Reach-v3 using a basic reward wrapper with weak dense shaping.
-                </figcaption>
-              </figure>
-
-              <p>
-                Overall, these results indicate that, in the Reach-v3 task, a simple and smooth reward structure with a
-                very small amount of dense guidance is already sufficient for PPO to learn effectively. Under this
-                semi-sparse setting, the additional intrinsic rewards from ICM and RND do not provide clear advantages,
-                and may even interfere with efficient exploitation. Therefore, for relatively simple reaching tasks,
-                reward design appears to have a stronger influence on performance than the choice of intrinsic
-                exploration module.
-              </p>
-
-              <h3 class="title is-4">Meta-World Reach-v3: Milestone Reward without Dense Shaping</h3>
-
-              <p>
-                In the next Reach-v3 experiment, we introduce a milestone-based reward wrapper that provides additional
-                rewards when the end-effector moves closer to the target. However, the dense shaping reward is still set
-                to zero. This setting provides slightly more guidance than the pure sparse-reward version, but the agent
-                still does not receive continuous distance-based feedback.
-              </p>
-
-              <p>
-                The learning curves show that all methods remain unstable under this setting. PPO and RND achieve short
-                periods of success in the early stage of training, but their success rates quickly drop and do not
-                recover consistently. ICM shows a delayed improvement around the middle stage of training, but the
-                improvement is temporary and does not lead to stable task completion.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/rdc5.jpg"
-                  alt="Meta-World Reach-v3 milestone reward without dense shaping learning curves">
-                <figcaption class="has-text-centered">
-                  Learning curves on Meta-World Reach-v3 using milestone-based rewards without dense shaping.
-                </figcaption>
-              </figure>
-
-              <p>
-                The exploration heatmaps indicate that the agents still concentrate their visits around limited regions
-                of the workspace. Compared with the pure sparse-reward setting, the milestone reward does not clearly
-                shift the visitation distribution toward the target. Instead, PPO, ICM, and RND all show strong
-                concentration near specific boundaries or corners, suggesting that milestone rewards alone are not
-                sufficient to guide stable target-oriented exploration.
-              </p>
-
-              <p>
-                ICM shows particularly strong concentration near the lower-left region, which suggests that
-                curiosity-driven exploration may become trapped in locally novel but task-irrelevant regions. Similarly,
-                PPO and RND do not show a clearly target-centered visitation pattern. This explains why the learning
-                curves only show short success spikes rather than stable improvement.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/reach_dc0.jpg"
-                  alt="Meta-World Reach-v3 milestone reward without dense shaping exploration heatmaps">
-                <figcaption class="has-text-centered">
-                  Exploration heatmaps of Meta-World Reach-v3 using milestone-based rewards without dense shaping.
-                </figcaption>
-              </figure>
-
-              <p>
-                Compared with the pure sparse-reward setting, milestone rewards do not provide improvement and are still
-                not sufficient to produce stable learning. The results suggest that reaching tasks in high-dimensional
-                continuous-control environments require more informative guidance than sparse success signals or
-                discrete milestone rewards alone. Without dense shaping, the agent may discover the target occasionally,
-                but it struggles to maintain a stable policy.
-              </p>
-
-              <h3 class="title is-4">Meta-World Reach-v3: Milestone Reward with Dense Shaping (0.005)</h3>
-
-              <p>
-                In the final Reach-v3 experiment, a small dense shaping reward of 0.005 is added on top of the
-                milestone-based reward. Although the shaping reward is extremely small compared with the success reward,
-                it significantly changes the learning dynamics of all methods.
-              </p>
-
-              <p>
-                Compared with the pure sparse-reward and milestone-only settings, all methods achieve substantially
-                higher success rates. PPO reaches an EWMA success rate above 0.8 earlier than the intrinsic-motivation
-                methods, indicating that the additional dense reward provides sufficient guidance for efficient policy
-                optimization. ICM also achieves strong performance but converges more slowly, while RND requires the
-                longest training time and does not consistently reach the same success level before training terminates.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/r5.jpg" alt="Meta-World Reach-v3 dense shaping learning curves">
-                <figcaption class="has-text-centered">
-                  Learning curves on Meta-World Reach-v3 with milestone rewards and a dense shaping reward of 0.005.
-                </figcaption>
-              </figure>
-
-              <p>
-                The exploration heatmaps reveal distinct behaviors among the three methods. PPO shows the most
-                concentrated visitation pattern around the target region, suggesting that it quickly exploits successful
-                trajectories once the weak dense reward provides useful guidance.
-              </p>
-
-              <p>
-                RND exhibits the higher visitation frequency around the target neighborhood, but this does not translate
-                into the best success rate. This suggests that reaching or passing through the target region is not
-                sufficient for successful reaching; the agent must also learn a stable control policy that consistently
-                satisfies the success condition.
-              </p>
-
-              <p>
-                ICM appears to visit the target neighborhood less frequently than RND, but it achieves better learning
-                performance. This indicates that ICM may convert exploration into more stable reaching behavior, while
-                RND may continue novelty-seeking around the target and delay exploitation. Overall, these results
-                highlight that target-region coverage and final task success are related but not equivalent.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/reach.jpg" alt="Meta-World Reach-v3 dense shaping exploration heatmaps">
-                <figcaption class="has-text-centered">
-                  Exploration heatmaps of Meta-World Reach-v3 with milestone rewards and a dense shaping reward of
-                  0.005.
-                </figcaption>
-              </figure>
-
-              <h3 class="title is-4">Meta-World Reach-v3: A result comparison of both basic and milestone reward
-                wrappers with dense shaping</h3>
-              <p>
-                Comparing all reward settings reveals that a small dense shaping signal plays a critical role in
-                high-dimensional sparse-reward robotic manipulation tasks. Under both the milestone-based and
-                basic-wrapper settings, adding a weak dense reward substantially improves learnability compared with the
-                fully sparse case. However, the results further show that reward structure and exploration mechanism
-                interact strongly. With the basic wrapper and <code>dense_coef = 0.005</code>, the PPO baseline learns
-                the Reach-v3 task most effectively, indicating that a simple and smooth directional reward is already
-                sufficient for stable policy learning. In contrast, when intrinsic exploration modules are introduced,
-                both ICM and RND perform better under the milestone-based wrapper than under the basic wrapper,
-                suggesting that these methods benefit more from structured intermediate progress signals. Overall, the
-                findings indicate that performance is determined not only by whether dense shaping is present, but also
-                by how the reward structure matches the underlying learning mechanism.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/c1.jpg"
-                  alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for PPO">
-                <figcaption class="has-text-centered">
-                  Success-rate comparison between milestone and basic reward wrappers for PPO on Meta-World Reach-v3,
-                  both using weak dense shaping.
-                </figcaption>
-              </figure>
-
-              <p>
-                For the PPO baseline, the basic wrapper produces faster and more stable learning than the milestone
-                wrapper. This suggests that, without intrinsic exploration, PPO benefits most from a simple and smooth
-                reward landscape that directly provides directional guidance.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/c2.jpg"
-                  alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for ICM">
-                <figcaption class="has-text-centered">
-                  Success-rate comparison between milestone and basic reward wrappers for PPO + ICM on Meta-World
-                  Reach-v3, both using weak dense shaping.
-                </figcaption>
-              </figure>
-
-              <p>
-                After adding ICM, the trend reverses. The milestone wrapper substantially outperforms the basic wrapper,
-                indicating that curiosity-driven exploration benefits more from structured intermediate progress signals
-                than from a purely smooth reward design.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/c3.jpg"
-                  alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for RND">
-                <figcaption class="has-text-centered">
-                  Success-rate comparison between milestone and basic reward wrappers for PPO + RND on Meta-World
-                  Reach-v3, both using weak dense shaping.
-                </figcaption>
-              </figure>
-
-              <p>
-                A similar pattern is observed for RND. The milestone wrapper again performs better than the basic
-                wrapper, suggesting that novelty-driven exploration also requires more explicit task structure in order
-                to convert exploration into stable task success.
-              </p>
               <h3 class="title is-4">Sparse Gridworld</h3>
               <p>
                 Sparse Gridworld is a simple, deterministic navigation environment where the agent must bypass obstacles
@@ -966,6 +644,433 @@
                 exploration coverage, the agent still needs to balance its curiosity with actually solving the task.
               </p>
 
+              <h3 class="title is-4">FrozenLake</h3>
+
+              <p>
+                In the FrozenLake task, PPO with entropy regularization already achieves strong performance under the
+                sparse-reward setting. However, the learning curves show that intrinsic motivation mainly affects the
+                learning speed rather than the final performance.
+              </p>
+
+              <p>
+                ICM shows the fastest early improvement in EWMA success rate, suggesting that curiosity-driven rewards
+                help the agent discover successful trajectories earlier in training. PPO also reaches a comparable
+                performance level, but its improvement appears later than ICM. In contrast, RND shows the slowest
+                improvement and performs slightly weaker during the early and middle stages of training.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/frozenlake_eval.jpg" alt="FrozenLake learning curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on FrozenLake evaluated every 5,000 steps.
+                </figcaption>
+              </figure>
+
+              <p>
+                The visitation heatmaps show that all methods eventually concentrate their visits along the upper row
+                and right column, which correspond to the dominant successful path toward the goal. PPO and RND exhibit
+                relatively similar final visitation patterns, indicating that both methods mainly exploit the successful
+                route after learning.
+              </p>
+
+              <p>
+                In contrast, ICM shows noticeably higher visitation frequencies around the starting region and nearby
+                states, especially along the upper-left part of the map. This suggests that ICM does not necessarily
+                increase global exploration coverage, but it improves local exploration around early states, which may
+                help the agent discover successful trajectories earlier in training.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/frozenlake_heatmap.jpg" alt="FrozenLake visitation heatmap">
+                <figcaption class="has-text-centered">
+                  State visitation heatmaps after training on FrozenLake.
+                </figcaption>
+              </figure>
+
+              <p>
+                Overall, the FrozenLake results suggest that intrinsic motivation does not significantly improve the
+                final success rate when PPO with entropy regularization already performs well. Instead, ICM mainly
+                improves early learning efficiency, while RND behaves more similarly to PPO and learns more slowly. This
+                highlights the difference between exploration behavior, learning speed, and final task performance in
+                sparse-reward environments.
+              </p>
+
+              <h3 class="title is-4">Sparse CartPole</h3>
+              <p>
+                Sparse CartPole modifies the classic CartPole-v1 task into a sparse-reward exploration problem. The
+                original dense per-step reward is removed; instead, the agent receives a reward of +10 only on the first
+                step at which the cart's x-position crosses a goal threshold of <code>x = 1.5</code> while the pole
+                remains upright. All other steps yield zero reward. A policy that simply balances the pole at
+                <code>x ≈ 0</code> — the optimal solution to the original dense task — never receives any reward in
+                our setting, so the agent must learn to simultaneously maintain balance and actively drive the cart
+                toward the goal region.
+              </p>
+
+              <p>
+                The learning curves show a clear separation between methods. PPO+ICM and PPO+RND both reach an EWMA
+                success rate of 0.8 at approximately 50k steps, while the standard PPO baseline requires roughly 175k
+                steps to reach the same threshold. This represents a 3-4× sample-efficiency improvement from adding
+                intrinsic motivation. The first successful evaluation episode occurs at around 20k–25k steps for the
+                intrinsic-reward methods, versus 140k–145k steps for the baseline.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/cartpole/cartpole_ewma_success_curve.png"
+                  alt="Sparse CartPole EWMA success rate curves">
+                <figcaption class="has-text-centered">
+                  EWMA success rate on Sparse CartPole. PPO+ICM and PPO+RND reach 0.8 around 50k steps; the PPO baseline
+                  requires roughly 175k steps.
+                </figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/cartpole/cartpole_success_curve.png"
+                  alt="Sparse CartPole evaluation success rate">
+                <figcaption class="has-text-centered">
+                  Evaluation success rate on Sparse CartPole, measured every 5,000 steps.
+                </figcaption>
+              </figure>
+
+              <figure class="image">
+                <img src="static/images/cartpole/cartpole_avg_return.png"
+                  alt="Sparse CartPole average return">
+                <figcaption class="has-text-centered">
+                  Average evaluation return on Sparse CartPole. Returns are binary (10 on success, 0 otherwise), so the
+                  curve mirrors the success rate.
+                </figcaption>
+              </figure>
+
+              <p>
+                The average-coverage curves show that PPO+ICM and PPO+RND quickly expand the agent's visitation across
+                the (cart-position, pole-angle) space, reaching roughly 25–28 unique bins per evaluation episode by 30k
+                steps. The PPO baseline remains around 4 bins for the first 140k steps before expanding to a similar
+                final coverage. This confirms that the intrinsic rewards drive earlier and broader exploration of the
+                state space, which translates into earlier discovery of the goal region.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/cartpole/cartpole_avg_coverage.png"
+                  alt="Sparse CartPole average coverage count">
+                <figcaption class="has-text-centered">
+                  Average state-coverage count on Sparse CartPole. Coverage expands much earlier for PPO+ICM and PPO+RND
+                  than for the baseline.
+                </figcaption>
+              </figure>
+
+              <p>
+                The state visitation heatmaps reveal where each agent spent most of its time at the end of training.
+                The x-axis shows cart position, the y-axis shows pole angle, and the dashed line marks the goal at
+                <code>x = 1.5</code>. All three methods concentrate visits near <code>x ≈ 0</code> with the pole close
+                to upright, which reflects the dominant strategy of balancing centrally and making short excursions
+                toward the goal to collect the sparse reward. Because each episode spends most of its steps balancing
+                and only a few steps near the goal, the goal region itself does not appear bright in the heatmaps.
+              </p>
+
+              <p>
+                PPO+ICM and PPO+RND show slightly broader horizontal smearing across cart positions and a wider spread
+                across pole angles than the PPO baseline, indicating that the intrinsic-reward methods explored more of
+                the state space during training even though their converged policies eventually settle into the same
+                balance-and-reach behavior.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/cartpole/cartpole_state_visitation.png"
+                  alt="Sparse CartPole state visitation heatmaps">
+                <figcaption class="has-text-centered">
+                  State visitation heatmaps for PPO+RND (left), PPO+ICM (middle), and PPO baseline (right). The dashed
+                  line marks the goal at <code>x = 1.5</code>.
+                </figcaption>
+              </figure>
+
+              <h4 class="title is-5">Summary of Sparse CartPole Findings</h4>
+              <p>
+                On Sparse CartPole, intrinsic motivation provides a substantial sample-efficiency advantage. PPO+ICM and
+                PPO+RND perform almost identically and reach the 0.8 EWMA success threshold roughly 3-4× faster than the
+                PPO baseline. All three methods eventually converge to a success rate of 1.0 with similar final
+                coverage, so the benefit of intrinsic rewards in this task lies entirely in faster discovery of the
+                goal rather than in better final performance. This pattern differs from FrozenLake, where intrinsic
+                motivation mainly affected early learning without changing final outcomes, and from the larger
+                Gridworld settings, where RND struggled with corner-trapping. In a continuous-state task with a clear
+                spatial exploration target, both ICM and RND provide reliable and comparable benefits.
+              </p>
+
+              <h3 class="title is-4">Meta-World Reach-v3</h3>
+              <p>
+                Meta-World Reach-v3 is a robotic manipulation task in which a simulated robot arm must move its end-effector to a target position in three-dimensional space. Because the task involves continuous states, continuous actions, and target-directed motion, it serves as a representative benchmark for sparse-reward exploration in high-dimensional control settings. In our benchmark, Reach-v3 is also used to study how different reward designs, such as milestone-based rewards and weak dense shaping, interact with PPO, ICM, and RND.
+              </p>
+
+              <h4 class="title is-5">Meta-World Reach-v3: Pure Sparse Reward</h4>
+
+              <p>
+                We first evaluate Meta-World Reach-v3 under a pure sparse-reward setting. In this setting, the original
+                dense reward is removed, and the agent receives a reward only when the target is successfully reached.
+                This makes the task significantly more difficult than original Meta-World setting.
+              </p>
+
+              <p>
+                The learning curves show that PPO occasionally discovers successful trajectories, especially in the
+                later stage of training, leading to several spikes in success rate and average return. However, the
+                performance remains unstable. RND shows a short early improvement but fails to maintain consistent
+                success, while ICM shows almost no successful learning under this setting.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/rb5.jpg" alt="Meta-World Reach-v3 pure sparse reward learning curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on Meta-World Reach-v3 under the pure sparse-reward setting.
+                </figcaption>
+              </figure>
+
+              <p>
+                The exploration heatmaps further suggest that PPO visits regions closer to the target more frequently,
+                which explains its occasional success. In contrast, ICM and RND tend to concentrate visits around
+                specific workspace regions or boundaries rather than consistently exploring the target area. This
+                indicates that intrinsic rewards do not necessarily produce task-relevant exploration in
+                high-dimensional continuous-control environments.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/reach_basic.jpg"
+                  alt="Meta-World Reach-v3 pure sparse reward exploration heatmaps">
+                <figcaption class="has-text-centered">
+                  Exploration heatmaps of Meta-World Reach-v3 under the pure sparse-reward setting.
+                </figcaption>
+              </figure>
+
+              <p>
+                Overall, the Reach-v3 results show that pure sparse rewards make robotic manipulation substantially
+                harder than discrete navigation tasks. Unlike FrozenLake, where all methods eventually learn reasonable
+                policies, Reach-v3 requires more informative exploration guidance. This motivates the use of controlled
+                sparse rewards or weak shaping terms in later experiments to stabilize training while still preserving
+                the sparse-reward challenge.
+              </p>
+
+              <h4 class="title is-5">Meta-World Reach-v3: Basic Wrapper with Weak Dense Shaping</h4>
+
+              <p>
+                In this Reach-v3 experiment, we introduce a weak dense shaping term with <code>dense_coef = 0.005</code>
+                to the pure sparse reward wrapper. Compared with the pure sparse reward setting, this way provides a
+                smoother and more direct learning signal, while still remaining much weaker than a fully dense reward
+                formulation.
+              </p>
+
+              <p>
+                The learning curves show that the PPO baseline performs best under this setting. PPO reaches high
+                success rates more quickly and achieves the most stable improvement in both success rate and EWMA
+                success rate. ICM also learns the task to some extent, but its improvement is slower and less stable
+                than PPO. In contrast, RND performs the worst: although it occasionally reaches moderate success rates,
+                it fails to maintain consistent progress and does not converge as reliably as the other two methods.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/rb0.005_5.jpg"
+                  alt="Meta-World Reach-v3 basic wrapper with weak dense shaping learning curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on Meta-World Reach-v3 using a basic reward wrapper with weak dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                The exploration heatmaps further support this observation. PPO shows a concentrated visitation pattern
+                around the target region across the x-y, x-z, and y-z projections, indicating that the weak dense
+                shaping term is already sufficient to guide the policy toward effective reaching behavior. ICM also
+                explores around the target region, but its visitation pattern is more diffuse, suggesting that
+                curiosity-driven exploration does not translate into equally efficient exploitation. RND appears
+                visually concentrated in some projections, but this does not lead to strong learning performance.
+              </p>
+
+              <p>
+                In particular, PPO exhibits the clearest alignment between target-centered exploration and final task
+                success. ICM reaches similar task-relevant regions, but its visitation remains broader and less stable.
+                RND, despite sometimes showing seemingly focused exploration heatmaps, fails to convert this exploration
+                pattern into sustained reaching success. This suggests that a visually concentrated exploration map does
+                not necessarily imply faster or better policy learning.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/rbasic_0.005.jpg"
+                  alt="Meta-World Reach-v3 basic wrapper with weak dense shaping exploration heatmaps">
+                <figcaption class="has-text-centered">
+                  Exploration heatmaps of Meta-World Reach-v3 using a basic reward wrapper with weak dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                Overall, these results indicate that, in the Reach-v3 task, a simple and smooth reward structure with a
+                very small amount of dense guidance is already sufficient for PPO to learn effectively. Under this
+                semi-sparse setting, the additional intrinsic rewards from ICM and RND do not provide clear advantages,
+                and may even interfere with efficient exploitation. Therefore, for relatively simple reaching tasks,
+                reward design appears to have a stronger influence on performance than the choice of intrinsic
+                exploration module.
+              </p>
+
+              <h4 class="title is-5">Meta-World Reach-v3: Milestone Reward without Dense Shaping</h4>
+
+              <p>
+                In the next Reach-v3 experiment, we introduce a milestone-based reward wrapper that provides additional
+                rewards when the end-effector moves closer to the target. However, the dense shaping reward is still set
+                to zero. This setting provides slightly more guidance than the pure sparse-reward version, but the agent
+                still does not receive continuous distance-based feedback.
+              </p>
+
+              <p>
+                The learning curves show that all methods remain unstable under this setting. PPO and RND achieve short
+                periods of success in the early stage of training, but their success rates quickly drop and do not
+                recover consistently. ICM shows a delayed improvement around the middle stage of training, but the
+                improvement is temporary and does not lead to stable task completion.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/rdc5.jpg"
+                  alt="Meta-World Reach-v3 milestone reward without dense shaping learning curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on Meta-World Reach-v3 using milestone-based rewards without dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                The exploration heatmaps indicate that the agents still concentrate their visits around limited regions
+                of the workspace. Compared with the pure sparse-reward setting, the milestone reward does not clearly
+                shift the visitation distribution toward the target. Instead, PPO, ICM, and RND all show strong
+                concentration near specific boundaries or corners, suggesting that milestone rewards alone are not
+                sufficient to guide stable target-oriented exploration.
+              </p>
+
+              <p>
+                ICM shows particularly strong concentration near the lower-left region, which suggests that
+                curiosity-driven exploration may become trapped in locally novel but task-irrelevant regions. Similarly,
+                PPO and RND do not show a clearly target-centered visitation pattern. This explains why the learning
+                curves only show short success spikes rather than stable improvement.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/reach_dc0.jpg"
+                  alt="Meta-World Reach-v3 milestone reward without dense shaping exploration heatmaps">
+                <figcaption class="has-text-centered">
+                  Exploration heatmaps of Meta-World Reach-v3 using milestone-based rewards without dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                Compared with the pure sparse-reward setting, milestone rewards do not provide improvement and are still
+                not sufficient to produce stable learning. The results suggest that reaching tasks in high-dimensional
+                continuous-control environments require more informative guidance than sparse success signals or
+                discrete milestone rewards alone. Without dense shaping, the agent may discover the target occasionally,
+                but it struggles to maintain a stable policy.
+              </p>
+
+              <h4 class="title is-5">Meta-World Reach-v3: Milestone Reward with Dense Shaping (0.005)</h4>
+
+              <p>
+                In the final Reach-v3 experiment, a small dense shaping reward of 0.005 is added on top of the
+                milestone-based reward. Although the shaping reward is extremely small compared with the success reward,
+                it significantly changes the learning dynamics of all methods.
+              </p>
+
+              <p>
+                Compared with the pure sparse-reward and milestone-only settings, all methods achieve substantially
+                higher success rates. PPO reaches an EWMA success rate above 0.8 earlier than the intrinsic-motivation
+                methods, indicating that the additional dense reward provides sufficient guidance for efficient policy
+                optimization. ICM also achieves strong performance but converges more slowly, while RND requires the
+                longest training time and does not consistently reach the same success level before training terminates.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/r5.jpg" alt="Meta-World Reach-v3 dense shaping learning curves">
+                <figcaption class="has-text-centered">
+                  Learning curves on Meta-World Reach-v3 with milestone rewards and a dense shaping reward of 0.005.
+                </figcaption>
+              </figure>
+
+              <p>
+                The exploration heatmaps reveal distinct behaviors among the three methods. PPO shows the most
+                concentrated visitation pattern around the target region, suggesting that it quickly exploits successful
+                trajectories once the weak dense reward provides useful guidance.
+              </p>
+
+              <p>
+                RND exhibits the higher visitation frequency around the target neighborhood, but this does not translate
+                into the best success rate. This suggests that reaching or passing through the target region is not
+                sufficient for successful reaching; the agent must also learn a stable control policy that consistently
+                satisfies the success condition.
+              </p>
+
+              <p>
+                ICM appears to visit the target neighborhood less frequently than RND, but it achieves better learning
+                performance. This indicates that ICM may convert exploration into more stable reaching behavior, while
+                RND may continue novelty-seeking around the target and delay exploitation. Overall, these results
+                highlight that target-region coverage and final task success are related but not equivalent.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/reach.jpg" alt="Meta-World Reach-v3 dense shaping exploration heatmaps">
+                <figcaption class="has-text-centered">
+                  Exploration heatmaps of Meta-World Reach-v3 with milestone rewards and a dense shaping reward of
+                  0.005.
+                </figcaption>
+              </figure>
+
+              <h4 class="title is-5">Meta-World Reach-v3: A result comparison of both basic and milestone reward
+                wrappers with dense shaping</h4>
+              <p>
+                Comparing all reward settings reveals that a small dense shaping signal plays a critical role in
+                high-dimensional sparse-reward robotic manipulation tasks. Under both the milestone-based and
+                basic-wrapper settings, adding a weak dense reward substantially improves learnability compared with the
+                fully sparse case. However, the results further show that reward structure and exploration mechanism
+                interact strongly. With the basic wrapper and <code>dense_coef = 0.005</code>, the PPO baseline learns
+                the Reach-v3 task most effectively, indicating that a simple and smooth directional reward is already
+                sufficient for stable policy learning. In contrast, when intrinsic exploration modules are introduced,
+                both ICM and RND perform better under the milestone-based wrapper than under the basic wrapper,
+                suggesting that these methods benefit more from structured intermediate progress signals. Overall, the
+                findings indicate that performance is determined not only by whether dense shaping is present, but also
+                by how the reward structure matches the underlying learning mechanism.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/c1.jpg"
+                  alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for PPO">
+                <figcaption class="has-text-centered">
+                  Success-rate comparison between milestone and basic reward wrappers for PPO on Meta-World Reach-v3,
+                  both using weak dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                For the PPO baseline, the basic wrapper produces faster and more stable learning than the milestone
+                wrapper. This suggests that, without intrinsic exploration, PPO benefits most from a simple and smooth
+                reward landscape that directly provides directional guidance.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/c2.jpg"
+                  alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for ICM">
+                <figcaption class="has-text-centered">
+                  Success-rate comparison between milestone and basic reward wrappers for PPO + ICM on Meta-World
+                  Reach-v3, both using weak dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                After adding ICM, the trend reverses. The milestone wrapper substantially outperforms the basic wrapper,
+                indicating that curiosity-driven exploration benefits more from structured intermediate progress signals
+                than from a purely smooth reward design.
+              </p>
+
+              <figure class="image">
+                <img src="static/images/c3.jpg"
+                  alt="Meta-World Reach-v3 comparison between milestone and basic wrapper for RND">
+                <figcaption class="has-text-centered">
+                  Success-rate comparison between milestone and basic reward wrappers for PPO + RND on Meta-World
+                  Reach-v3, both using weak dense shaping.
+                </figcaption>
+              </figure>
+
+              <p>
+                A similar pattern is observed for RND. The milestone wrapper again performs better than the basic
+                wrapper, suggesting that novelty-driven exploration also requires more explicit task structure in order
+                to convert exploration into stable task success.
+              </p>
+
               <h3 class="title is-4">Meta-World: Button-Press-v3</h3>
               <p>
                 In the Meta-World Button-Press-v3 environment, introducing intrinsic motivation (PPO+ICM and PPO+RND)
@@ -1103,104 +1208,7 @@
                 object interactions.
               </p>
 
-              <h3 class="title is-4">Sparse CartPole</h3>
-              <p>
-                Sparse CartPole modifies the classic CartPole-v1 task into a sparse-reward exploration problem. The
-                original dense per-step reward is removed; instead, the agent receives a reward of +10 only on the first
-                step at which the cart's x-position crosses a goal threshold of <code>x = 1.5</code> while the pole
-                remains upright. All other steps yield zero reward. A policy that simply balances the pole at
-                <code>x ≈ 0</code> — the optimal solution to the original dense task — never receives any reward in
-                our setting, so the agent must learn to simultaneously maintain balance and actively drive the cart
-                toward the goal region.
-              </p>
-
-              <p>
-                The learning curves show a clear separation between methods. PPO+ICM and PPO+RND both reach an EWMA
-                success rate of 0.8 at approximately 50k steps, while the standard PPO baseline requires roughly 175k
-                steps to reach the same threshold. This represents a 3-4× sample-efficiency improvement from adding
-                intrinsic motivation. The first successful evaluation episode occurs at around 20k–25k steps for the
-                intrinsic-reward methods, versus 140k–145k steps for the baseline.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/cartpole/cartpole_ewma_success_curve.png"
-                  alt="Sparse CartPole EWMA success rate curves">
-                <figcaption class="has-text-centered">
-                  EWMA success rate on Sparse CartPole. PPO+ICM and PPO+RND reach 0.8 around 50k steps; the PPO baseline
-                  requires roughly 175k steps.
-                </figcaption>
-              </figure>
-
-              <figure class="image">
-                <img src="static/images/cartpole/cartpole_success_curve.png"
-                  alt="Sparse CartPole evaluation success rate">
-                <figcaption class="has-text-centered">
-                  Evaluation success rate on Sparse CartPole, measured every 5,000 steps.
-                </figcaption>
-              </figure>
-
-              <figure class="image">
-                <img src="static/images/cartpole/cartpole_avg_return.png"
-                  alt="Sparse CartPole average return">
-                <figcaption class="has-text-centered">
-                  Average evaluation return on Sparse CartPole. Returns are binary (10 on success, 0 otherwise), so the
-                  curve mirrors the success rate.
-                </figcaption>
-              </figure>
-
-              <p>
-                The average-coverage curves show that PPO+ICM and PPO+RND quickly expand the agent's visitation across
-                the (cart-position, pole-angle) space, reaching roughly 25–28 unique bins per evaluation episode by 30k
-                steps. The PPO baseline remains around 4 bins for the first 140k steps before expanding to a similar
-                final coverage. This confirms that the intrinsic rewards drive earlier and broader exploration of the
-                state space, which translates into earlier discovery of the goal region.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/cartpole/cartpole_avg_coverage.png"
-                  alt="Sparse CartPole average coverage count">
-                <figcaption class="has-text-centered">
-                  Average state-coverage count on Sparse CartPole. Coverage expands much earlier for PPO+ICM and PPO+RND
-                  than for the baseline.
-                </figcaption>
-              </figure>
-
-              <p>
-                The state visitation heatmaps reveal where each agent spent most of its time at the end of training.
-                The x-axis shows cart position, the y-axis shows pole angle, and the dashed line marks the goal at
-                <code>x = 1.5</code>. All three methods concentrate visits near <code>x ≈ 0</code> with the pole close
-                to upright, which reflects the dominant strategy of balancing centrally and making short excursions
-                toward the goal to collect the sparse reward. Because each episode spends most of its steps balancing
-                and only a few steps near the goal, the goal region itself does not appear bright in the heatmaps.
-              </p>
-
-              <p>
-                PPO+ICM and PPO+RND show slightly broader horizontal smearing across cart positions and a wider spread
-                across pole angles than the PPO baseline, indicating that the intrinsic-reward methods explored more of
-                the state space during training even though their converged policies eventually settle into the same
-                balance-and-reach behavior.
-              </p>
-
-              <figure class="image">
-                <img src="static/images/cartpole/cartpole_state_visitation.png"
-                  alt="Sparse CartPole state visitation heatmaps">
-                <figcaption class="has-text-centered">
-                  State visitation heatmaps for PPO+RND (left), PPO+ICM (middle), and PPO baseline (right). The dashed
-                  line marks the goal at <code>x = 1.5</code>.
-                </figcaption>
-              </figure>
-
-              <h4 class="title is-5">Summary of Sparse CartPole Findings</h4>
-              <p>
-                On Sparse CartPole, intrinsic motivation provides a substantial sample-efficiency advantage. PPO+ICM and
-                PPO+RND perform almost identically and reach the 0.8 EWMA success threshold roughly 3-4× faster than the
-                PPO baseline. All three methods eventually converge to a success rate of 1.0 with similar final
-                coverage, so the benefit of intrinsic rewards in this task lies entirely in faster discovery of the
-                goal rather than in better final performance. This pattern differs from FrozenLake, where intrinsic
-                motivation mainly affected early learning without changing final outcomes, and from the larger
-                Gridworld settings, where RND struggled with corner-trapping. In a continuous-state task with a clear
-                spatial exploration target, both ICM and RND provide reliable and comparable benefits.
-              </p>
+              
             </div>
           </div>
         </div>
